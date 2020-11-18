@@ -16,7 +16,7 @@ namespace DatabaseConnection
         public static Customer GetCustomerByName(string name)
         {
             using var ctx = new Context();
-            return ctx.Customers.FirstOrDefault(c => c.Name.ToLower() == name.ToLower());
+            return ctx.Customers.FirstOrDefault(c => c.FirstName.ToLower() == name.ToLower());
         }
         public static bool RegisterSale(Customer customer, Movie movie)
         {

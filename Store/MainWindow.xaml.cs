@@ -42,7 +42,7 @@ namespace Store
                             image.MouseUp += Image_MouseUp;
                             image.HorizontalAlignment = HorizontalAlignment.Center;
                             image.VerticalAlignment = VerticalAlignment.Center;
-                            image.Source = new BitmapImage(new Uri(movie.ImageURL));
+                            image.Source = new BitmapImage(new Uri(movie.Poster));
                             //image.Height = 120;
                             image.Margin = new Thickness(4, 4, 4, 4);
 
@@ -70,7 +70,7 @@ namespace Store
             int i = y * MovieGrid.ColumnDefinitions.Count + x;
             State.Pick = State.Movies[i];
 
-            if(API.RegisterSale(State.User, State.Pick))
+            if(API.RegisterSale(State.User, State.Movies))
                 MessageBox.Show("All is well and you can download your movie now.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
             else
                 MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);

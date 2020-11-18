@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DatabaseConnection;
+using DatabaseConnection.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Store

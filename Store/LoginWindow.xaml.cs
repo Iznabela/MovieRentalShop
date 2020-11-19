@@ -37,5 +37,12 @@ namespace Store
                 UsernameField.Text = "...";
             }
         }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            var registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            this.Close();
+        }
     }
 }

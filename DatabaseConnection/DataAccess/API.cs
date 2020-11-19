@@ -14,10 +14,10 @@ namespace DatabaseConnection
             using var ctx = new Context();
             return ctx.Movies.OrderBy(m => m.Title).Skip(a).Take(b).ToList();
         }
-        public static Customer GetCustomerByName(string name)
+        public static Customer GetCustomerByUserName(string userName)
         {
             using var ctx = new Context();
-            return ctx.Customers.FirstOrDefault(c => c.FirstName.ToLower() == name.ToLower());
+            return ctx.Customers.FirstOrDefault(c => c.UserName.ToLower() == userName.ToLower());
         }
 
         public static bool RegisterSale(Customer customer, List<Movie> movies)

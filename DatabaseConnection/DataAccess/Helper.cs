@@ -11,5 +11,8 @@ namespace DatabaseConnection.DataAccess
 
         public static string movieData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Movies.csv";
         public static string customerData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Customers.csv";
+
+        public static string bellaMovieData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Movies.csv";
+        public static string bellaCustomerData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Customers.csv";
     }
 }

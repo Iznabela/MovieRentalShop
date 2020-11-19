@@ -16,7 +16,7 @@ namespace DatabaseConnection
             optionsBuilder
                 //.LogTo(s => System.Diagnostics.Debug.WriteLine(s))
                 .UseLazyLoadingProxies()
-                .UseSqlServer(Helper.FredrikConnString); //ÄNDRA BEROENDE PÅ VEM SOM ANSLUTAR.         
+                .UseSqlServer(Helper.BellaConnString); //ÄNDRA BEROENDE PÅ VEM SOM ANSLUTAR.         
                 
         }
 

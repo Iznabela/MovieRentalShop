@@ -13,9 +13,9 @@ namespace DatabaseConnection
             if (ctx.Customers.Count() == 0 && ctx.Movies.Count() == 0)
             {
                 Seeding.ImportData(ctx);
+                Seeding.ImportOrders(ctx);
             }
 
-            Seeding.ImportOrders(ctx);
 
         }
     }

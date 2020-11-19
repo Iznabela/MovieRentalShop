@@ -89,12 +89,14 @@ namespace DatabaseConnection
                 var rMovie1 = random.Next(firstMovieId, lastMovieId);
                 var rMovie2 = random.Next(firstMovieId, lastMovieId);
 
-                var movie1 = ctx.Movies.Where(m => m.Id == rMovie1).FirstOrDefault();
-                var movie2 = ctx.Movies.Where(m => m.Id == rMovie2).FirstOrDefault();
+                //var movie1 = ctx.Movies.Where(m => m.Id == rMovie1).FirstOrDefault();
+                //var movie2 = ctx.Movies.Where(m => m.Id == rMovie2).FirstOrDefault();
+                var movie1 = mList.Where(m => m.Id == rMovie1).Single();
+                var movie2 = mList.Where(m => m.Id == rMovie2).Single();
                 var chosenMovies = new List<Movie>() { movie1, movie2 };
 
                 var customerId = random.Next(firstCustomerID, lastCustomerID);
-                var customer = ctx.Customers.Where(c => c.Id == customerId).Single();
+                var customer = cList.Where(c => c.Id == customerId).Single();
 
                 var nRental = new Rental
                 {

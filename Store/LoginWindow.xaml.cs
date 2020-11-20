@@ -27,11 +27,11 @@ namespace Store
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             using var ctx = new Context();
-            var customer = ctx.Customers.Where(c => c.UserName == UsernameField.Text).FirstOrDefault();
+            var customer = ctx.Customers.Where(c => c.UserName == UsernameField.Text).FirstOrDefault();            
 
             State.User = API.GetCustomerByUserName(UsernameField.Text.Trim());
 
-            if (State.User.UserName == customer.UserName)
+            if (State.User != null)
             {
                 if (PasswordField.Text == customer.Password)
                 {

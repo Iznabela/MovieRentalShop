@@ -44,43 +44,43 @@
 
                 <!-- First Name -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="First Name" FontFamily="Segoe UI Semibold" 
+                           Text="First Name" FontFamily="Segoe UI" 
                            FontWeight="SemiBold" Margin="10,10,0,0"/>
 
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <TextBox x:Name="rFirstNameText" VerticalAlignment="Center" 
+                    <TextBox x:Name="rFirstNameText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
                      HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="WhiteSmoke"/>
+                     BorderThickness="0" Background="WhiteSmoke" FontFamily="Segoe UI Semibold"/>
 
                 </Border>
 
                 <!-- Last Name -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="Last Name: " FontFamily="Segoe UI Semibold" 
+                           Text="Last Name: " FontFamily="Segoe UI" 
                            FontWeight="SemiBold" Margin="10,10,0,0"/>
 
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <TextBox x:Name="rLastNameText" VerticalAlignment="Center" 
+                    <TextBox x:Name="rLastNameText" VerticalAlignment="Center" VerticalContentAlignment="Center"
                      HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="WhiteSmoke"/>
+                     BorderThickness="0" Background="WhiteSmoke" FontFamily="Segoe UI Semibold"/>
 
                 </Border>
 
                 <!-- Email Adress -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="Email Adress: " FontFamily="Segoe UI Semibold" 
+                           Text="Email Adress: " FontFamily="Segoe UI" 
                            FontWeight="SemiBold" Margin="10,10,0,0"/>
 
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <TextBox x:Name="rEmailAdressText" VerticalAlignment="Center" 
+                    <TextBox x:Name="rEmailAdressText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
                      HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="WhiteSmoke"/>
+                     BorderThickness="0" Background="WhiteSmoke" FontFamily="Segoe UI Semibold"/>
 
                 </Border>
 
@@ -94,9 +94,9 @@
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
                     
-                    <TextBox x:Name="ruserNameText" VerticalAlignment="Center" 
-                             HorizontalAlignment="Left" Width="140" Height="25" Margin="0,0,0,0"
-                             BorderThickness="0" Background="WhiteSmoke" FontFamily="Segoe UI"/>
+                    <TextBox x:Name="ruserNameText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                             HorizontalAlignment="Left" TextAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
+                             BorderThickness="0" Background="WhiteSmoke" FontFamily="Segoe UI Semibold"/>
                 </Border>
 
                 <!-- Password -->
@@ -107,7 +107,7 @@
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <PasswordBox x:Name="rpasswordText" VerticalAlignment="Center" 
+                    <PasswordBox x:Name="rpasswordText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
                      HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
                      BorderThickness="0" Background="WhiteSmoke"/>
                     
@@ -155,15 +155,9 @@
                 </WrapPanel>
 
 
-
-
             </StackPanel>
             
-            
-
-
-
-
+           
 
         </GroupBox>
 

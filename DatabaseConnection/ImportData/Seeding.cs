@@ -17,7 +17,7 @@ namespace DatabaseConnection
         public static void ImportData(Context ctx)
         {
 
-            using (var reader = new StreamReader(Helper.movieData))
+            using (var reader = new StreamReader(Helper.bellaMovieData))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 csv.Configuration.RegisterClassMap<MovieMap>();
@@ -28,7 +28,7 @@ namespace DatabaseConnection
             }
           
 
-            using (var reader = new StreamReader(Helper.customerData))
+            using (var reader = new StreamReader(Helper.bellaCustomerData))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 csv.Configuration.RegisterClassMap<CustomerMap>();

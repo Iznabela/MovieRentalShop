@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d" FontSize="18"
-        Title="LoginWindow" Height="530" Width="560">
+        Title="LoginWindow" Height="530" Width="800">
     <Grid>
         <!-- Grid definitions -->
         <Grid.ColumnDefinitions>

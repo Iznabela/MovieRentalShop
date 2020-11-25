@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d" FontSize="18"
-        Title="LoginWindow" Height="530" Width="560">
+        Title="LoginWindow" Height="600" Width="560">
     <Grid>
         <!-- Grid definitions -->
         <Grid.ColumnDefinitions>
@@ -33,15 +33,15 @@
         <!-- Login groupbox -->
         <GroupBox Grid.Column="1" Grid.Row="2" Margin="10,0,10,10" 
                   Background="WhiteSmoke" BorderBrush="Black" 
-                  BorderThickness="3" Height="330" Width="300"
+                  BorderThickness="3" Height="350" Width="300"
                   Grid.ColumnSpan="1" FontFamily="Segoe Script">
             <GroupBox.Header>Customer Login</GroupBox.Header>
 
             <StackPanel>
                 <!-- Username -->
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="Username:" FontFamily="Segoe UI Semibold" 
-                           FontWeight="SemiBold" Margin="10,20,0,0"/>
+                           FontWeight="SemiBold" Margin="0,20,0,10"/>
 
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="0,0,0,0" Width="150">
@@ -51,9 +51,9 @@
                 </Border>
 
                 <!-- Password -->
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="Password:" FontFamily="Segoe UI Semibold" 
-                           FontWeight="SemiBold" Margin="10,20,0,0"/>
+                           FontWeight="SemiBold" Margin="0,20,0,10"/>
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
                         Margin="0,0,0,0" Width="150">
                     <PasswordBox x:Name="passwordText" VerticalAlignment="Center" 
@@ -93,14 +93,14 @@
                 
                 <!-- Register option -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                           Text="Not registered?" FontFamily="Segoe UI Semibold" />
+                           Text="Not registered?" FontFamily="Segoe UI Semibold" Margin="5,5,5,5" />
                 <Button x:Name="registerButton" Content="Create Account" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="0" FontSize="12" Click="registerButton_click">
+                        BorderThickness="0" FontSize="12" Click="registerButton_click" Margin="5,0,5,5">
                     <Button.Template>
                         <ControlTemplate>
-                            <Border CornerRadius="10" Background="WhiteSmoke">
-                                <TextBlock Text="Create Account" Foreground="DarkRed"
+                            <Border CornerRadius="10" Background="LightGray">
+                                <TextBlock Text="Create Account" Foreground="Black"
                                            HorizontalAlignment="Center"
                                            Margin="20,2,20,2" Height="18"
                                            FontSize="10" FontFamily="Segoe UI Semibold">

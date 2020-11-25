@@ -28,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="film-clipart-movie-premiere-12.png" />
+    <Content Include="film-clipart-movie-premiere-12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

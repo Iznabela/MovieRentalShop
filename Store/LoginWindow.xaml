@@ -25,7 +25,7 @@
         <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1"
                   Height="100" Width="500" BorderThickness="0">
             <StackPanel>
-                <Image Source="/Images/film-clipart-movie-premiere-12.png" 
+                <Image Source="/film-clipart-movie-premiere-12.png" 
                    Stretch="Uniform" />
             </StackPanel>
         </GroupBox>
@@ -96,7 +96,7 @@
                            Text="Not registered?" FontFamily="Segoe UI Semibold" />
                 <Button x:Name="registerButton" Content="Create Account" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="0" FontSize="12">
+                        BorderThickness="0" FontSize="12" Click="registerButton_click">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="10" Background="WhiteSmoke">

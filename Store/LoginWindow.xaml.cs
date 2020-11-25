@@ -53,7 +53,7 @@ namespace Store
             }
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+        private void registerButton_click(object sender, RoutedEventArgs e)
         {
             var registerWindow = new RegisterWindow();
             registerWindow.Show();

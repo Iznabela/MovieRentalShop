@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d" FontSize="18"
-        Title="LoginWindow" Height="600" Width="560">
+        Title="LoginWindow" Height="530" Width="560">
     <Grid>
         <!-- Grid definitions -->
         <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
         <!-- Login groupbox -->
         <GroupBox Grid.Column="1" Grid.Row="2" Margin="10,0,10,10" 
                   Background="WhiteSmoke" BorderBrush="Black" 
-                  BorderThickness="3" Height="350" Width="300"
+                  BorderThickness="3" Height="330" Width="300"
                   Grid.ColumnSpan="1" FontFamily="Segoe Script">
             <GroupBox.Header>Customer Login</GroupBox.Header>
 

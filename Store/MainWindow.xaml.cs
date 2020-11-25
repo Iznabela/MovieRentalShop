@@ -24,17 +24,16 @@ namespace Store
         public MainWindow()
         {
             InitializeComponent();
+            int i = 0;
 
             State.Movies = API.GetMovieSlice(0, 30);
-            for (int y = 0; y < MovieGrid.RowDefinitions.Count; y++)
+            for (int y = 3; y < MovieGrid.RowDefinitions.Count; y++)
             {
-                for (int x = 0; x < MovieGrid.ColumnDefinitions.Count; x++)
+                for (int x = 1; x < MovieGrid.ColumnDefinitions.Count - 1; x++)
                 {
-                    int i = y * MovieGrid.ColumnDefinitions.Count + x;
                     if (i < State.Movies.Count)
                     {
                         var movie = State.Movies[i];
-
                         try
                         {
                             var image = new Image() { };
@@ -44,20 +43,21 @@ namespace Store
                             image.VerticalAlignment = VerticalAlignment.Center;
                             image.Source = new BitmapImage(new Uri(movie.Poster));
                             //image.Height = 120;
-                            image.Margin = new Thickness(4, 4, 4, 4);
+                            image.Margin = new Thickness(20, 20, 20, 20);
 
                             MovieGrid.Children.Add(image);
                             Grid.SetRow(image, y);
                             Grid.SetColumn(image, x);
                         }
-                        catch (Exception e) when 
-                            (e is ArgumentNullException || 
-                             e is System.IO.FileNotFoundException || 
+                        catch (Exception e) when
+                            (e is ArgumentNullException ||
+                             e is System.IO.FileNotFoundException ||
                              e is UriFormatException)
                         {
                             continue;
                         }
                     }
+                    i++;
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace Store
             int i = y * MovieGrid.ColumnDefinitions.Count + x;
             State.Pick = State.Movies[i];
 
-            if(API.RegisterSale(State.User, State.Movies))
+            if (API.RegisterSale(State.User, State.Movies))
                 MessageBox.Show("All is well and you can download your movie now.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
             else
                 MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);

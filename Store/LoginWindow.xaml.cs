@@ -24,16 +24,16 @@ namespace Store
             InitializeComponent();
         }
 
-        private void LogIn_Click(object sender, RoutedEventArgs e)
+        private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             using var ctx = new Context();
-            var customer = ctx.Customers.Where(c => c.UserName == UsernameField.Text).FirstOrDefault();            
+            var customer = ctx.Customers.Where(c => c.UserName == userNameText.Text).FirstOrDefault();            
 
-            State.User = API.GetCustomerByUserName(UsernameField.Text.Trim());
+            State.User = API.GetCustomerByUserName(userNameText.Text.Trim());
 
             if (State.User != null)
             {
-                if (PasswordField.Text == customer.Password)
+                if (passwordText.Password == customer.Password)
                 {
                     var next_window = new MainWindow();
                     next_window.Show();
@@ -42,14 +42,14 @@ namespace Store
                 else
                 {
                     MessageBox.Show("Password did not match user - please try again!");
-                    PasswordField.Text = "...";
+                    passwordText.Password = "...";
                 }
             }
             else
             {
                 MessageBox.Show("User not found - please create an account!");
-                UsernameField.Text = "...";
-                PasswordField.Text = "...";
+                userNameText.Text = "...";
+                passwordText.Password = "...";
             }
         }
 

@@ -24,6 +24,7 @@ namespace Store
         public MainWindow()
         {
             InitializeComponent();
+
             int i = 0;
 
             State.Movies = API.GetMovieSlice(0, 30);
@@ -36,18 +37,24 @@ namespace Store
                         var movie = State.Movies[i];
                         try
                         {
-                            var image = new Image() { };
-                            image.Cursor = Cursors.Hand;
+                            
+                            var image = new Image()
+                            {
+                                Cursor = Cursors.Hand,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Margin = new Thickness(20, 20, 20, 20)                                
+                            };
                             image.MouseUp += Image_MouseUp;
-                            image.HorizontalAlignment = HorizontalAlignment.Center;
-                            image.VerticalAlignment = VerticalAlignment.Center;
                             image.Source = new BitmapImage(new Uri(movie.Poster));
                             //image.Height = 120;
-                            image.Margin = new Thickness(20, 20, 20, 20);
-
                             MovieGrid.Children.Add(image);
                             Grid.SetRow(image, y);
                             Grid.SetColumn(image, x);
+
+                            image.MouseEnter += ImageMouseEnter;
+                            image.MouseLeave += ImageMouseLeave;
+
                         }
                         catch (Exception e) when
                             (e is ArgumentNullException ||
@@ -59,7 +66,19 @@ namespace Store
                     }
                     i++;
                 }
-            }
+            }            
+        }
+
+        // when hovering over a movie poster
+        private void ImageMouseEnter(object sender, MouseEventArgs e)
+        {
+            MovieGrid.ShowGridLines = false;            
+        }
+
+        // when not hovering over a movie poster
+        private void ImageMouseLeave(object sender, MouseEventArgs e)
+        {
+            MovieGrid.ShowGridLines = true;
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

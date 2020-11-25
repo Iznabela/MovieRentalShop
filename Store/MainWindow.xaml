@@ -46,7 +46,8 @@
                     <Image Source="C:\Users\isabe\source\repos\ProjektHyrfilm\Store\Images\—Pngtree—home icon_3568907.jpg" />
                 </StackPanel>
             </Button>
-
+            
+            
         </Grid>
     </ScrollViewer>
 </Window>

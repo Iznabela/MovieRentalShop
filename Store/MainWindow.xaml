@@ -19,14 +19,14 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
-                <RowDefinition Height="180" />
+                <RowDefinition Height="200" />
                 <RowDefinition Height="70" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="180" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
 

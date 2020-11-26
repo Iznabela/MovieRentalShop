@@ -36,8 +36,7 @@ namespace Store
                     {
                         var movie = State.Movies[i];
                         try
-                        {
-                            
+                        {                          
                             var image = new Image()
                             {
                                 Cursor = Cursors.Hand,
@@ -48,10 +47,34 @@ namespace Store
                             image.MouseUp += Image_MouseUp;
                             image.Source = new BitmapImage(new Uri(movie.Poster));
                             //image.Height = 120;
-                            MovieGrid.Children.Add(image);
-                            Grid.SetRow(image, y);
-                            Grid.SetColumn(image, x);
 
+                            var button = new Button()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Margin = new Thickness(3, 3, 3, 3),
+                                Content = image
+                            };
+
+                            var stackPanel = new StackPanel
+                            {
+                            };
+
+                            stackPanel.Children.Add(button);
+
+                            var groupBox = new GroupBox 
+                            {
+                                Content = stackPanel
+                            };                                             
+
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.Margin = new Thickness(3, 3, 3, 3);
+                                                        
+                            MovieGrid.Children.Add(groupBox);
+
+                            Grid.SetRow(groupBox, y);
+                            Grid.SetColumn(groupBox, x);
+                            
                             image.MouseEnter += ImageMouseEnter;
                             image.MouseLeave += ImageMouseLeave;
 
@@ -72,7 +95,7 @@ namespace Store
         // when hovering over a movie poster
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
-            MovieGrid.ShowGridLines = false;            
+            MovieGrid.ShowGridLines = false;
         }
 
         // when not hovering over a movie poster

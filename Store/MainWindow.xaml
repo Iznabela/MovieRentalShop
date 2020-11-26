@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d"
-        Title="MainWindow" Height="530" Width="840">
+        Title="MainWindow" Height="800" Width="840">
     <ScrollViewer>
         <Grid Name="MovieGrid" Background="White" ShowGridLines="True">
             <Grid.ColumnDefinitions>
@@ -19,14 +19,14 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
-                <RowDefinition Height="160" />
+                <RowDefinition Height="180" />
                 <RowDefinition Height="70" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
 

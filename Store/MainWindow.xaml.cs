@@ -42,30 +42,76 @@ namespace Store
                                 Cursor = Cursors.Hand,
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Center,
-                                Margin = new Thickness(20, 20, 20, 20)                                
+                                Margin = new Thickness(20, 20, 20, 20),
+                                Height = 100
                             };
+
+                            var bigImage = new Image()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Margin = new Thickness(10, 10, 10, 10),
+                                Height = 150
+                            };
+
                             image.MouseUp += Image_MouseUp;
                             image.Source = new BitmapImage(new Uri(movie.Poster));
-                            //image.Height = 120;
+                            bigImage.Source = new BitmapImage(new Uri(movie.Poster));
 
-                            var button = new Button()
+                            var comboBox = new ComboBox()
                             {
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Margin = new Thickness(3, 3, 3, 3),
-                                Content = image
+                                Text = "INFO"
                             };
 
-                            var stackPanel = new StackPanel
+                            var titleText = new TextBlock()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Bottom,
+                                Text = State.Movies[i].Title
+                            };
+
+                            var buyButton = new Button()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Right,
+                                VerticalAlignment = VerticalAlignment.Bottom,
+                                Content = "Buy"
+                            };
+
+                            var infoButton = new Button()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Left,
+                                VerticalAlignment = VerticalAlignment.Bottom,
+                                Content = "Info"
+                            };
+
+                            var stackPanel = new StackPanel ()
                             {
                             };
 
-                            stackPanel.Children.Add(button);
-
-                            var groupBox = new GroupBox 
+                            var pictureStackPanel = new StackPanel()
                             {
-                                Content = stackPanel
-                            };                                             
+                                Height = 160
+                            };
+
+                            pictureStackPanel.Children.Add(bigImage);
+
+                            stackPanel.Children.Add(buyButton);
+                            stackPanel.Children.Add(infoButton);
+                            stackPanel.Children.Add(titleText);
+
+                            comboBox.Items.Add(image);
+                            comboBox.Items.Add(stackPanel);
+
+
+                            var groupBox = new GroupBox()
+                            {
+                                Header = pictureStackPanel,
+                                Content = comboBox,
+                                Height = 180
+                            };
 
                             stackPanel.Orientation = Orientation.Horizontal;
                             stackPanel.Margin = new Thickness(3, 3, 3, 3);
@@ -77,7 +123,6 @@ namespace Store
                             
                             image.MouseEnter += ImageMouseEnter;
                             image.MouseLeave += ImageMouseLeave;
-
                         }
                         catch (Exception e) when
                             (e is ArgumentNullException ||

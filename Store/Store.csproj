@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <None Remove="film-clipart-movie-premiere-12.png" />
+    <None Remove="Images\Exit.png" />
+    <None Remove="Images\Header.png" />
+    <None Remove="Images\Home.png" />
+    <None Remove="Images\MörkProfil.png" />
+    <None Remove="Images\Profile.jpg" />
+    <None Remove="Images\—Pngtree—home icon_3568907.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +37,17 @@
     <Content Include="film-clipart-movie-premiere-12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Exit.png" />
+    <Resource Include="Images\Home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Header.png" />
+    <Resource Include="Images\MörkProfil.png" />
+    <Resource Include="Images\Profile.jpg" />
+    <Resource Include="Images\—Pngtree—home icon_3568907.jpg" />
   </ItemGroup>
 
 </Project>

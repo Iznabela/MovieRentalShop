@@ -28,9 +28,9 @@ namespace Store
             int i = 0;
 
             State.Movies = API.GetMovieSlice(0, 30);
-            for (int y = 3; y < MovieGrid.RowDefinitions.Count; y++)
+            for (int y = 0; y < MovieGrid.RowDefinitions.Count; y++)
             {
-                for (int x = 1; x < MovieGrid.ColumnDefinitions.Count - 1; x++)
+                for (int x = 0; x < MovieGrid.ColumnDefinitions.Count; x++)
                 {
                     if (i < State.Movies.Count)
                     {
@@ -102,8 +102,11 @@ namespace Store
                             stackPanel.Children.Add(infoButton);
                             stackPanel.Children.Add(titleText);
 
+
                             comboBox.Items.Add(image);
                             comboBox.Items.Add(stackPanel);
+
+                            
 
 
                             var groupBox = new GroupBox()
@@ -161,6 +164,46 @@ namespace Store
                 MessageBox.Show("All is well and you can download your movie now.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
             else
                 MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomeWindow.Children.Clear();
+
+            var groupBox = new GroupBox
+            {
+                Name = "groupbox",
+                Header = "Profile Information",
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                Height = 400,
+                Width = 430,
+                FontFamily = new FontFamily("Segoe Script")
+            };
+
+            var textblock = new TextBlock
+            {
+                Text = "Hej",
+                FontSize = 20
+            };
+            
+            var stackpanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical
+            };
+
+            HomeWindow.Children.Add(groupBox);
+
+            groupBox.Content = stackpanel;
+
+            stackpanel.Children.Add(textblock);
+
+            
+
+            var moviesRented = new TextBlock
+            {
+
+            };
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="900" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="950" Width="950" WindowStartupLocation="CenterScreen"
         Background="Black" Foreground="Black">
 
     <Grid Background="Black">
@@ -35,7 +35,8 @@
                         Width="60"
                         Background="Transparent"
                         Margin="0,0,0,10"
-                        BorderBrush="LightGray">
+                        BorderBrush="LightGray"
+                                Click="ProfileButton_Click">
                             <Image Source="Images/MörkProfil.png">
 
                             </Image>
@@ -57,7 +58,7 @@
             <!-- Header-->
             <Grid Height="100"              
               VerticalAlignment="Top"
-              Margin="75,30,0,20">
+              Margin="75,10,0,20">
             <StackPanel Orientation="Horizontal">
 
                 <Image Source="Images\Header.png"
@@ -99,11 +100,11 @@
             </Grid>
 
             <!--MainWindow in MainWindow for other windows-->
-
-            <Grid Height="700"
+            <GroupBox>
+            <Grid Height="750"
               Width="700"              
               x:Name="HomeWindow"
-              Margin="120,140,20,20">
+              Margin="120,100,20,20">
 
                 <Border CornerRadius="12,12,12,12"
                     BorderThickness="1"
@@ -113,11 +114,10 @@
 
                     <!--MovieGrid-->
                     <ScrollViewer>
-                        <Grid Height="700"
+                        <Grid Height="750"
               Width="700"              
               x:Name="MovieGrid"
-                  Background="White"
-                  ShowGridLines="True">
+                  Background="White">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -138,6 +138,7 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
+            </GroupBox>
 
         </Grid>
 

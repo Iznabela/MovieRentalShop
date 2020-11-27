@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,48 @@ namespace DatabaseConnection
                 System.Diagnostics.Debug.WriteLine(e.InnerException.Message);
                 return false;
             }
+        }
+
+
+        /// <summary>
+        /// Metod för att skapa propertys i klassen RentalHistory för att
+        /// skicka tillbaka data till DataGrid, kunna lista varje kunds historik. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IEnumerable rentalsHistory(int id)
+        {
+
+            
+            var rh = new List<RentalHistory>();
+
+            var rentals = ctx.Rentals
+                .Include(c => c.Movies)
+                .Where(m => m.Id == id)
+                .ToList();
+
+            foreach (var obj in rentals)
+            {
+
+                foreach (var item in obj.Movies)
+                {
+                    var rHistory = new RentalHistory();
+                    rHistory.MovieTitle = item.Title;
+                    rHistory.RentalDate = obj.Date;
+                    rHistory.DaysToReturn = rHistory.ReturnDays(rHistory.RentalDate);
+                    rh.Add(rHistory);
+                }
+            }
+
+            return rh;
+
+            
+
+
+
+
+            
+            
         }
     }   
 

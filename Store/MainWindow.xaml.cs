@@ -139,7 +139,7 @@ namespace Store
         {
             var gridPanel = (StackPanel)sender;
             gridPanel.Height = 220;
-            gridPanel.Width = 160;        
+            gridPanel.Width = 160;
         }
 
         // when not hovering over a movie poster
@@ -174,35 +174,63 @@ namespace Store
                 Header = "Profile Information",
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
-                Height = 400,
-                Width = 430,
+                Height = 750,
+                Width = 700,
                 FontFamily = new FontFamily("Segoe Script")
             };
 
-            var textblock = new TextBlock
-            {
-                Text = "Hej",
-                FontSize = 20
-            };
-            
+            HomeWindow.Children.Add(groupBox);
+
             var stackpanel = new StackPanel
             {
                 Orientation = Orientation.Vertical
             };
 
-            HomeWindow.Children.Add(groupBox);
-
             groupBox.Content = stackpanel;
 
-            stackpanel.Children.Add(textblock);
+            var welcomeMessage = new TextBlock
+            {
+                TextAlignment = TextAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Hello {State.User.UserName}!",
+                FontSize = 20,
+                Margin = new Thickness(0, 20, 0, 0),
+            };
+
+            stackpanel.Children.Add(welcomeMessage);
+
+            var historyMessage = new TextBlock
+            {
+                TextAlignment = TextAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Below you can see your history and currently rented movies.",
+                FontSize = 20,
+                Margin = new Thickness(0, 20, 0, 0),
+            };
+
+            stackpanel.Children.Add(historyMessage);
 
             
+            
 
-            var moviesRented = new TextBlock
+            var dataGrid = new DataGrid
             {
-
+                Height = 500,
+                Width = 650,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(0, 20, 0, 0),
+                DataContext = State.Movies ////ändra sedan, bara för test
             };
+
+            DataGridTextColumn titleColumn = new DataGridTextColumn();               
+            stackpanel.Children.Add(dataGrid);
+            dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
+            
+
         }
+
+
+
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {

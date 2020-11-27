@@ -24,7 +24,7 @@
                         Width="60"
                         Background="Transparent"
                         Margin="0,20,0,10"
-                        BorderBrush="LightGray">
+                        BorderBrush="LightGray" Click="HomeButton_Click">
                             <Image Source="Images/Home.png">
 
                             </Image>

@@ -203,5 +203,37 @@ namespace Store
 
             };
         }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomeWindow.Children.Clear();
+
+            var updatedMovieGrid = new Grid()
+            {
+                Height = 750,
+                Width = 700,
+                Name = "updatedMovieGrid",
+                ShowGridLines = true
+            };
+
+            HomeWindow.Children.Add(updatedMovieGrid);
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                var columnDefinition = new ColumnDefinition()
+                {
+
+                };
+
+                var rowDefinition = new RowDefinition()
+                {
+
+                };
+
+                updatedMovieGrid.ColumnDefinitions.Add(columnDefinition);
+                updatedMovieGrid.RowDefinitions.Add(rowDefinition);
+            }
+        }
     }
 }

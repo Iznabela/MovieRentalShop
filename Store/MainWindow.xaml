@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="950" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="950" Width="1250" WindowStartupLocation="CenterScreen"
         Background="Black" Foreground="Black">
 
     <Grid Background="Black">
@@ -19,52 +19,52 @@
                         Margin="0,0,0,0">
 
 
-                        <Button x:Name="HomeButton"
+                    <Button x:Name="HomeButton"
                         Height="60"
                         Width="60"
                         Background="Transparent"
                         Margin="0,20,0,10"
                         BorderBrush="LightGray" Click="HomeButton_Click">
-                            <Image Source="Images/Home.png">
+                        <Image Source="Images/Home.png">
 
-                            </Image>
+                        </Image>
 
-                        </Button>
-                        <Button x:Name="ProfileButton"
+                    </Button>
+                    <Button x:Name="ProfileButton"
                         Height="60"
                         Width="60"
                         Background="Transparent"
                         Margin="0,0,0,10"
                         BorderBrush="LightGray"
                                 Click="ProfileButton_Click">
-                            <Image Source="Images/MörkProfil.png">
+                        <Image Source="Images/MörkProfil.png">
 
-                            </Image>
-                        </Button>
+                        </Image>
+                    </Button>
 
-                        <Button x:Name="Exit"
+                    <Button x:Name="Exit"
                         Height="60"
                         Width="60"
                         Background="Transparent"
                         Margin="0,0,0,10"
                         BorderBrush="LightGray">
-                            <Image Source="Images/Exit.png">
-                            </Image>
-                        </Button>                    
+                        <Image Source="Images/Exit.png">
+                        </Image>
+                    </Button>
                 </StackPanel>
             </Grid>
-            
+
 
             <!-- Header-->
             <Grid Height="100"              
               VerticalAlignment="Top"
               Margin="75,10,0,20">
-            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
 
-                <Image Source="Images\Header.png"
+                    <Image Source="Images\Header.png"
                        Width="250"
                        Margin="50,0,20,0">
-                </Image>
+                    </Image>
                     <Grid Width="200"
                           Margin="10">
                         <StackPanel Orientation="Vertical">
@@ -72,7 +72,7 @@
                                        HorizontalAlignment="Center"
                                         FontSize="20"
                                        FontFamily="Segoe Script"/>
-                            
+
                         </StackPanel>
 
 
@@ -93,51 +93,51 @@
                                      Width="200"
                                      Height="30"/>
                         </StackPanel>
-                        
+
                     </Grid>
 
-            </StackPanel>
+                </StackPanel>
             </Grid>
 
             <!--MainWindow in MainWindow for other windows-->
             <GroupBox>
-            <Grid Height="750"
-              Width="700"              
+                <Grid Height="750"
+              Width="900"              
               x:Name="HomeWindow"
-              Margin="120,100,20,20">
+              Margin="100,100,20,20">
 
-                <Border CornerRadius="12,12,12,12"
+                    <Border CornerRadius="12,12,12,12"
                     BorderThickness="1"
                     Padding="1"
                     Background="Black">
 
 
-                    <!--MovieGrid-->
-                    <ScrollViewer>
-                        <Grid Height="750"
-              Width="700"              
+                        <!--MovieGrid-->
+                        <ScrollViewer>
+                            <Grid Height="750"
+              Width="900"              
               x:Name="MovieGrid"
                   Background="White">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="230"/>
+                                    <RowDefinition Height="230"/>
+                                    <RowDefinition Height="230"/>
+                                    <RowDefinition Height="230"/>
+                                    <RowDefinition Height="230"/>
+                                </Grid.RowDefinitions>
 
-                        </Grid>
-                    </ScrollViewer>
-                </Border>
-            </Grid>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
             </GroupBox>
 
         </Grid>

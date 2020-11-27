@@ -36,7 +36,7 @@ namespace Store
                     {
                         var movie = State.Movies[i];
                         try
-                        {                          
+                        {
                             var image = new Image()
                             {
                                 Cursor = Cursors.Hand,
@@ -89,7 +89,7 @@ namespace Store
                                 Content = "Info"
                             };
 
-                            var comboBoxPanel = new StackPanel ()
+                            var comboBoxPanel = new StackPanel()
                             {
                             };
 
@@ -101,11 +101,7 @@ namespace Store
                             comboBox.Items.Add(comboBoxPanel);
 
 
-                            comboBox.Items.Add(image);
-                            comboBox.Items.Add(stackPanel);
-
-
-                            var groupBox = new GroupBox()
+                            var gridPanel = new StackPanel()
                             {
                                 Name = "movieGridBox",
                                 Height = 180,
@@ -116,12 +112,12 @@ namespace Store
 
                             comboBoxPanel.Orientation = Orientation.Horizontal;
                             comboBoxPanel.Margin = new Thickness(3, 3, 3, 3);
-                                                        
+
                             MovieGrid.Children.Add(gridPanel);
 
                             Grid.SetRow(gridPanel, y);
                             Grid.SetColumn(gridPanel, x);
-                            
+
                             gridPanel.MouseEnter += ImageMouseEnter;
                             gridPanel.MouseLeave += ImageMouseLeave;
                         }
@@ -135,7 +131,7 @@ namespace Store
                     }
                     i++;
                 }
-            }            
+            }
         }
 
         // when hovering over a movie poster

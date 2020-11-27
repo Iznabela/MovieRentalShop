@@ -72,12 +72,8 @@ namespace Store
                 Width = 700,
                 FontFamily = new FontFamily("Segoe Script")
             };
+            HomeWindow.Children.Add(groupBox);            
 
-            var textblock = new TextBlock
-            {
-                Text = "Hej",
-                FontSize = 20
-            };
 
             var stackpanel = new StackPanel
             {
@@ -106,9 +102,7 @@ namespace Store
                 Margin = new Thickness(0, 20, 0, 0),
             };
 
-            stackpanel.Children.Add(historyMessage);
-
-            stackpanel.Children.Add(textblock);
+            stackpanel.Children.Add(historyMessage);            
 
 
 

@@ -42,8 +42,8 @@ namespace Store
                                 Cursor = Cursors.Hand,
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Center,
-                                Margin = new Thickness(20, 20, 20, 20),
-                                Height = 100
+                                Margin = new Thickness(0, 0, 0, 0),
+                                Height = 150
                             };
 
                             var bigImage = new Image()
@@ -51,7 +51,7 @@ namespace Store
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Margin = new Thickness(10, 10, 10, 10),
-                                Height = 150
+                                Height = 250
                             };
 
                             image.MouseUp += Image_MouseUp;
@@ -63,14 +63,16 @@ namespace Store
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Margin = new Thickness(3, 3, 3, 3),
-                                Text = "INFO"
+                                Text = "INFO",
+                                Height = 20,
+                                Width = 100
                             };
 
                             var titleText = new TextBlock()
                             {
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Bottom,
-                                Text = State.Movies[i].Title
+                                Text = State.Movies[i].Title.ToString()
                             };
 
                             var buyButton = new Button()
@@ -87,45 +89,41 @@ namespace Store
                                 Content = "Info"
                             };
 
-                            var stackPanel = new StackPanel ()
+                            var comboBoxPanel = new StackPanel ()
                             {
                             };
 
-                            var pictureStackPanel = new StackPanel()
-                            {
-                                Height = 160
-                            };
+                            comboBoxPanel.Children.Add(buyButton);
+                            comboBoxPanel.Children.Add(infoButton);
+                            comboBoxPanel.Children.Add(titleText);
 
-                            pictureStackPanel.Children.Add(bigImage);
-
-                            stackPanel.Children.Add(buyButton);
-                            stackPanel.Children.Add(infoButton);
-                            stackPanel.Children.Add(titleText);
+                            comboBox.Items.Add(bigImage);
+                            comboBox.Items.Add(comboBoxPanel);
 
 
                             comboBox.Items.Add(image);
                             comboBox.Items.Add(stackPanel);
 
-                            
-
 
                             var groupBox = new GroupBox()
                             {
-                                Header = pictureStackPanel,
-                                Content = comboBox,
-                                Height = 180
+                                Name = "movieGridBox",
+                                Height = 180,
+                                Width = 120,
                             };
+                            gridPanel.Children.Add(image);
+                            gridPanel.Children.Add(comboBox);
 
-                            stackPanel.Orientation = Orientation.Horizontal;
-                            stackPanel.Margin = new Thickness(3, 3, 3, 3);
+                            comboBoxPanel.Orientation = Orientation.Horizontal;
+                            comboBoxPanel.Margin = new Thickness(3, 3, 3, 3);
                                                         
-                            MovieGrid.Children.Add(groupBox);
+                            MovieGrid.Children.Add(gridPanel);
 
-                            Grid.SetRow(groupBox, y);
-                            Grid.SetColumn(groupBox, x);
+                            Grid.SetRow(gridPanel, y);
+                            Grid.SetColumn(gridPanel, x);
                             
-                            image.MouseEnter += ImageMouseEnter;
-                            image.MouseLeave += ImageMouseLeave;
+                            gridPanel.MouseEnter += ImageMouseEnter;
+                            gridPanel.MouseLeave += ImageMouseLeave;
                         }
                         catch (Exception e) when
                             (e is ArgumentNullException ||
@@ -143,13 +141,17 @@ namespace Store
         // when hovering over a movie poster
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
-            MovieGrid.ShowGridLines = false;
+            var gridPanel = (StackPanel)sender;
+            gridPanel.Height = 220;
+            gridPanel.Width = 160;        
         }
 
         // when not hovering over a movie poster
         private void ImageMouseLeave(object sender, MouseEventArgs e)
         {
-            MovieGrid.ShowGridLines = true;
+            var gridPanel = (StackPanel)sender;
+            gridPanel.Height = 180;
+            gridPanel.Width = 120;
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

@@ -16,7 +16,7 @@ namespace DatabaseConnection.Models
         {
             var returnDate = date.AddDays(7);
 
-            var daysleft = DateTime.Now - returnDate;
+            var daysleft = returnDate - DateTime.Now;
 
             return Convert.ToInt32(daysleft.Days.ToString());            
             

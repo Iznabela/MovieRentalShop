@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -46,16 +47,29 @@ namespace Store
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
+
+            //Debugging, den känner inte av vilken kolumn den är i.
+            //Kanske känner av i fel grid? 
             var x = Grid.GetColumn(sender as UIElement);
             var y = Grid.GetRow(sender as UIElement);
-
             int i = y * MovieGrid.ColumnDefinitions.Count + x;
-            State.Pick = State.Movies[i];
 
-            if (API.RegisterSale(State.User, State.Movies))
-                MessageBox.Show("All is well and you can download your movie now.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (State.PickedMovies.Contains(State.Movies[i]))  //ha dessa funktioner i varukorgen istället
+            {
+                State.PickedMovies.Remove(State.Movies[i]);
+                MessageBox.Show("Removed from basket", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
             else
-                MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            {
+                State.PickedMovies.Add(State.Movies[i]);
+                MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+
+
+
+            
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -72,7 +86,7 @@ namespace Store
                 Width = 700,
                 FontFamily = new FontFamily("Segoe Script")
             };
-            HomeWindow.Children.Add(groupBox);            
+            HomeWindow.Children.Add(groupBox);
 
 
             var stackpanel = new StackPanel
@@ -102,7 +116,7 @@ namespace Store
                 Margin = new Thickness(0, 20, 0, 0),
             };
 
-            stackpanel.Children.Add(historyMessage);            
+            stackpanel.Children.Add(historyMessage);
 
 
 
@@ -115,10 +129,10 @@ namespace Store
                 DataContext = State.Movies ////ändra sedan, bara för test
             };
 
-            DataGridTextColumn titleColumn = new DataGridTextColumn();               
+            DataGridTextColumn titleColumn = new DataGridTextColumn();
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
-            
+
 
         }
 
@@ -149,12 +163,12 @@ namespace Store
             {
                 var columnDefinition = new ColumnDefinition()
                 {
-                    
+
                 };
 
                 var rowDefinition = new RowDefinition()
                 {
-                   
+
                 };
 
                 rowDefinition.Height = new GridLength(230);
@@ -163,6 +177,116 @@ namespace Store
             }
 
             PrintPosters(updatedMovieGrid);
+        }
+
+        /// <summary>
+        /// Metod för att komma till varukorgen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CartButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomeWindow.Children.Clear();
+
+            HomeWindow.Children.Clear();
+
+            var groupBox = new GroupBox
+            {
+                Name = "groupboxforcart",
+                Header = "Cart",
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                Height = 750,
+                Width = 700,
+                FontFamily = new FontFamily("Segoe Script")
+            };
+            HomeWindow.Children.Add(groupBox);
+
+
+            var stackpanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical
+            };
+
+            groupBox.Content = stackpanel;
+
+            var welcomeMessage = new TextBlock
+            {
+                TextAlignment = TextAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Hello {State.User.UserName}!",
+                FontSize = 20,
+                Margin = new Thickness(0, 20, 0, 0),
+            };
+
+            stackpanel.Children.Add(welcomeMessage);
+
+            var infoMessage = new TextBlock
+            {
+                TextAlignment = TextAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Below you can see your current cart.",
+                FontSize = 20,
+                Margin = new Thickness(0, 20, 0, 0),
+            };
+
+            stackpanel.Children.Add(infoMessage);
+
+
+            var lview = new ListView()
+            {
+                Height = 400,
+                Width = 600,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+            stackpanel.Children.Add(lview);
+            lview.SetValue(Grid.RowProperty, 2);
+
+            GridView gv = new GridView();
+            GridViewColumn gv1 = new GridViewColumn();
+            gv1.DisplayMemberBinding = new Binding("Title");
+            gv1.Header = "Title";
+            gv.Columns.Add(gv1);
+
+            GridViewColumn gv2 = new GridViewColumn();
+            gv2.DisplayMemberBinding = new Binding("Price");
+            gv2.Header = "Price";
+            gv.Columns.Add(gv2);
+
+            lview.ItemsSource = State.PickedMovies;
+            lview.View = gv;
+
+            var buyButton = new Button
+            {
+                Height = 100,
+                Width = 100,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Name = "BuyButton",
+                Content = "Buy"
+            };
+
+            buyButton.Click += buybtn_Click;
+            stackpanel.Children.Add(buyButton);
+
+
+
+        }
+
+
+        /// <summary>
+        /// BuyButton for the Cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buybtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Använd kod i varukorg
+            if (API.RegisterSale(State.User, State.PickedMovies))
+                MessageBox.Show("Added to your basket.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         // Printing movie posters in movie grid

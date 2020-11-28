@@ -63,10 +63,11 @@ namespace DatabaseConnection
             var rh = new List<RentalHistory>();
 
             var rentals = ctx.Rentals
+                .Where(m => m.Customer.Id == id)
                 .Include(c => c.Movies)
-                .Where(m => m.Id == id)
                 .ToList();
 
+            
             foreach (var obj in rentals)
             {
 

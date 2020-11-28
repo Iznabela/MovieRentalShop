@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="film-clipart-movie-premiere-12.png" />
+    <None Remove="Images\cart.png" />
     <None Remove="Images\Exit.png" />
     <None Remove="Images\Header.png" />
     <None Remove="Images\Home.png" />
@@ -40,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\cart.png" />
     <Resource Include="Images\Exit.png" />
     <Resource Include="Images\Home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

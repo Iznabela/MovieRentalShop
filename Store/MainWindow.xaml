@@ -141,45 +141,12 @@
             </Grid>
 
             <!--MainWindow in MainWindow for other windows-->
-            <GroupBox>
-                <Grid Height="750"
+            
+              <Grid
               Width="900"              
               x:Name="HomeWindow"
-              Margin="100,100,20,20">
-
-                    <Border CornerRadius="12,12,12,12"
-                    BorderThickness="1"
-                    Padding="1"
-                    Background="Black">
-
-
-                        <!--MovieGrid-->
-                        <ScrollViewer>
-                            <Grid Height="750"
-              Width="900"              
-              x:Name="MovieGrid"
-                  Background="White">
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="230"/>
-                                    <RowDefinition Height="230"/>
-                                    <RowDefinition Height="230"/>
-                                    <RowDefinition Height="230"/>
-                                    <RowDefinition Height="230"/>
-                                </Grid.RowDefinitions>
-
-                            </Grid>
-                        </ScrollViewer>
-                    </Border>
-                </Grid>
-            </GroupBox>
+              Margin="100,100,20,20"> 
+              </Grid>           
 
         </Grid>
 

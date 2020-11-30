@@ -88,7 +88,7 @@ namespace DatabaseConnection
         public static List<Movie> SearchFunction(string text)
         {
             var mList = new List<Movie>();
-            mList = ctx.Movies.Where(m => m.Title.Contains(text)).ToList();
+            mList = ctx.Movies.Where(m => m.Title.Contains(text)).Take(100).ToList();
 
             return mList;
         }
@@ -100,11 +100,13 @@ namespace DatabaseConnection
 
             if (sortValue == "All")
             {
-                mList = ctx.Movies.ToList();
+                mList = ctx.Movies
+                    .Take(100)
+                    .ToList();
             }
             else
             {
-                mList = ctx.Movies.Where(m => m.Genre.Contains(sortValue)).ToList();
+                mList = ctx.Movies.Where(m => m.Genre.Contains(sortValue)).Take(100).ToList();
 
             }
             return mList;

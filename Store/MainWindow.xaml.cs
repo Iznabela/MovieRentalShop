@@ -22,11 +22,16 @@ namespace Store
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
+
         public MainWindow()
         {
             InitializeComponent();
             State.Movies = API.GetMovieSlice(0, 30);
-            PrintPosters(MovieGrid);
+            HomeWindow.Children.Clear();            ;
+            PrintPosters(CreateMovieGrid());
+            
         }
 
         // when hovering over a movie poster
@@ -52,7 +57,7 @@ namespace Store
             //Kanske känner av i fel grid? 
             var x = Grid.GetColumn(sender as UIElement);
             var y = Grid.GetRow(sender as UIElement);
-            int i = y * MovieGrid.ColumnDefinitions.Count + x;
+            int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
             if (State.PickedMovies.Contains(State.Movies[i]))  //ha dessa funktioner i varukorgen istället
             {
@@ -143,11 +148,10 @@ namespace Store
         private Grid CreateMovieGrid()
         {
             var updatedMovieGrid = new Grid()
-            {
-                Height = 750,
+            {                
                 Width = 900,
                 Name = "updatedMovieGrid",
-                ShowGridLines = true
+                ShowGridLines = false
             };
 
 
@@ -159,22 +163,35 @@ namespace Store
 
             HomeWindow.Children.Add(scrollViewer);
 
-            for (int i = 0; i < 5; i++)
+            var column = 5;
+            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);           
+
+
+            for (int j = 0; j < column; j++)
             {
                 var columnDefinition = new ColumnDefinition()
                 {
 
                 };
+                updatedMovieGrid.ColumnDefinitions.Add(columnDefinition);
+            }
 
+            for (int i = 0; i < row; i++)
+            {            
+                
+                
                 var rowDefinition = new RowDefinition()
                 {
 
                 };
 
                 rowDefinition.Height = new GridLength(230);
-                updatedMovieGrid.ColumnDefinitions.Add(columnDefinition);
+
                 updatedMovieGrid.RowDefinitions.Add(rowDefinition);
+                              
             }
+
+            State.currentGrid = updatedMovieGrid;
 
             return updatedMovieGrid;
         }
@@ -294,9 +311,9 @@ namespace Store
             // create stackpanel to put groupbox and separate titletext in
 
             int i = 0;
-            for (int y = 0; y < MovieGrid.RowDefinitions.Count; y++)
+            for (int y = 0; y < movieGrid.RowDefinitions.Count; y++)
             {
-                for (int x = 0; x < MovieGrid.ColumnDefinitions.Count; x++)
+                for (int x = 0; x < movieGrid.ColumnDefinitions.Count; x++)
                 {
                     if (i < State.Movies.Count)
                     {
@@ -315,16 +332,18 @@ namespace Store
                             movieGrid.Children.Add(image);
                             Grid.SetRow(image, y);
                             Grid.SetColumn(image, x);
+                            i++;
                         }
                         catch (Exception e) when
                             (e is ArgumentNullException ||
                              e is System.IO.FileNotFoundException ||
                              e is UriFormatException)
                         {
+                            
                             continue;
                         }
                     }
-                    i++;
+                    
 
 
                 }
@@ -336,8 +355,6 @@ namespace Store
             State.Movies = API.SearchFunction(searchTxt.Text);
             HomeWindow.Children.Clear();
             PrintPosters(CreateMovieGrid());
-
-
         }
 
         private void sortGenre_Btn_Click(object sender, RoutedEventArgs e)
@@ -347,6 +364,6 @@ namespace Store
             PrintPosters(CreateMovieGrid());
         }
 
-        
+
     }
 }

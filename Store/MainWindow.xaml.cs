@@ -58,8 +58,15 @@ namespace Store
             var y = Grid.GetRow(sender as UIElement);
             int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
-            var movieWindow = new MovieWindow(State.Movies[i], State.User);
+            var movie = State.Movies[i];
+
+            var movieWindow = new MovieWindow(movie);
             movieWindow.Show();
+
+            if (MovieWindow.toCartButtonClicked == true)
+            {
+                State.PickedMovies.Add(movie);
+            }
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -212,6 +219,7 @@ namespace Store
 
             var stackpanel = new StackPanel
             {
+                Name = "CartStack",
                 Orientation = Orientation.Vertical
             };
 

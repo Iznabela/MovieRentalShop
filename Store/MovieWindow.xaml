@@ -66,22 +66,7 @@
                 </Rectangle>
 
                 <!-- Add to cart or cancel -->
-                <Button x:Name="ToCartButton" Grid.Column="0" Grid.Row="4" Margin="10,10,10,10"
-                        Width="80" Height="25" BorderThickness="0" Grid.ColumnSpan="1" 
-                        FontFamily="Segoe UI Semibold" Click="MouseUpToCart">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="LightGray">
-                                <TextBlock Text="Add to cart" Foreground="Black"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Margin="0,0,0,0" FontSize="12" 
-                                           FontFamily="Segoe UI Semibold">
-                                </TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                
                 <!-- Cancel -->
                 <Button x:Name="cancelButton" Grid.Column="1" Grid.Row="4"
                         Grid.ColumnSpan="2" Width="60" Height="25"

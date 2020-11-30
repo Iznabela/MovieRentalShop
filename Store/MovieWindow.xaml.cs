@@ -18,8 +18,8 @@ namespace Store
     /// </summary>
     public partial class MovieWindow : Window
     {
-
-        public MovieWindow(Movie movie, Customer customer)
+        public static bool toCartButtonClicked = false;
+        public MovieWindow(Movie movie)
         {
             InitializeComponent();
 
@@ -40,15 +40,35 @@ namespace Store
             Genre.Text = movie.Genre;
             Score.Text = "Score: " + movie.IMDBScore.ToString();
 
-            
+            var toCartButton = new Button
+            {
+                Margin = new Thickness(10, 10, 10, 10),
+                Width = 80,
+                Height = 25,
+                BorderThickness = new Thickness(0),
+                FontFamily = new FontFamily("Segoe UI Semibold"),
+            };
+
+            var cartButtonText = new TextBlock
+            {
+                Text = "Add to cart",
+                FontSize = 12
+            };
+
+            toCartButton.Content = cartButtonText;
+
+            toCartButton.Cursor = Cursors.Hand;
+            toCartButton.Click += ToCartClick;
+
+            BoxGrid.Children.Add(toCartButton);
+            Grid.SetRow(toCartButton, 4);
+            Grid.SetColumn(toCartButton, 0);
+            Grid.SetColumnSpan(toCartButton, 1);
         }
 
-        private void MouseUpToCart(object sender, RoutedEventArgs e)
+        private void ToCartClick(object sender, RoutedEventArgs e)
         {
-            State.PickedMovies.Add(sender);
-
-            
-            
+            toCartButtonClicked = true;
             MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

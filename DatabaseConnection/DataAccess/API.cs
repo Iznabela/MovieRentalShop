@@ -19,7 +19,7 @@ namespace DatabaseConnection
         }
 
         public static List<Movie> GetMovieSlice(int a, int b)
-        {           
+        {
             return ctx.Movies.OrderBy(m => m.Title)
                 .Skip(a)
                 .Take(b)
@@ -27,18 +27,18 @@ namespace DatabaseConnection
         }
 
         public static Customer GetCustomerByUserName(string userName)
-        {            
+        {
             return ctx.Customers
                 .FirstOrDefault(c => c.UserName.ToLower() == userName.ToLower());
         }
 
         public static bool RegisterSale(Customer customer, List<Movie> movies)
-        {            
+        {
             try
-            {               
+            {
 
                 ctx.Add(new Rental() { Date = DateTime.Now, Customer = customer, Movies = movies });
-                bool one_record_added =  ctx.SaveChanges() == 1;
+                bool one_record_added = ctx.SaveChanges() == 1;
                 return one_record_added;
             }
             catch (DbUpdateException e)
@@ -59,7 +59,7 @@ namespace DatabaseConnection
         public static IEnumerable rentalsHistory(int id)
         {
 
-            
+
             var rh = new List<RentalHistory>();
 
             var rentals = ctx.Rentals
@@ -67,7 +67,7 @@ namespace DatabaseConnection
                 .Include(c => c.Movies)
                 .ToList();
 
-            
+
             foreach (var obj in rentals)
             {
 
@@ -83,14 +83,32 @@ namespace DatabaseConnection
 
             return rh;
 
-            
-
-
-
-
-            
-            
         }
-    }   
+
+        public static List<Movie> SearchFunction(string text)
+        {
+            var mList = new List<Movie>();
+            mList = ctx.Movies.Where(m => m.Title.Contains(text)).ToList();
+
+            return mList;
+        }
+
+        public static List<Movie> SortGenre(object selectedValue)
+        {
+            var sortValue = selectedValue.ToString();
+            var mList = new List<Movie>();
+
+            if (sortValue == "All")
+            {
+                mList = ctx.Movies.ToList();
+            }
+            else
+            {
+                mList = ctx.Movies.Where(m => m.Genre.Contains(sortValue)).ToList();
+
+            }
+            return mList;
+        }
+    }
 
 }

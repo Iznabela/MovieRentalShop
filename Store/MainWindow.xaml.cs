@@ -128,16 +128,20 @@ namespace Store
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
 
-
         }
-
-
 
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow.Children.Clear();
 
+            State.Movies = API.GetMovieSlice(0, 30);
+
+            PrintPosters(CreateMovieGrid());
+        }
+
+        private Grid CreateMovieGrid()
+        {
             var updatedMovieGrid = new Grid()
             {
                 Height = 750,
@@ -172,7 +176,7 @@ namespace Store
                 updatedMovieGrid.RowDefinitions.Add(rowDefinition);
             }
 
-            PrintPosters(updatedMovieGrid);
+            return updatedMovieGrid;
         }
 
         /// <summary>
@@ -266,8 +270,6 @@ namespace Store
             buyButton.Click += buybtn_Click;
             stackpanel.Children.Add(buyButton);
 
-
-
         }
 
 
@@ -328,5 +330,23 @@ namespace Store
                 }
             }
         }
+
+        private void search_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            State.Movies = API.SearchFunction(searchTxt.Text);
+            HomeWindow.Children.Clear();
+            PrintPosters(CreateMovieGrid());
+
+
+        }
+
+        private void sortGenre_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            State.Movies = API.SortGenre(SortByGenre.SelectedValue);
+            HomeWindow.Children.Clear();
+            PrintPosters(CreateMovieGrid());
+        }
+
+        
     }
 }

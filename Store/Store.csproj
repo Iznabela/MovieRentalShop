@@ -35,12 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="film-clipart-movie-premiere-12.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\cart.png" />
     <Resource Include="Images\Exit.png" />
     <Resource Include="Images\Home.png">

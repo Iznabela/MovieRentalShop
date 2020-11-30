@@ -58,6 +58,7 @@ namespace Store
             var registerWindow = new RegisterWindow();
             registerWindow.Show();
             this.Close();
+            
         }
     }
 }

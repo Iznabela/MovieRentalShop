@@ -8,8 +8,16 @@
         Title="MainWindow" Height="950" Width="1250" WindowStartupLocation="CenterScreen"
         Background="Black" Foreground="Black">
 
-    <Grid Background="Black">
-        <Grid Background="White" Margin="10">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                <GradientStop Color="White" Offset="0.0" />
+                <GradientStop Color="LightGoldenrodYellow" Offset="0.1" />
+                <GradientStop Color="DarkRed" Offset="0.6" />
+                <GradientStop Color="LightGoldenrodYellow" Offset="1.1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Background="Transparent" Margin="10">
 
             <Grid Margin="20">
 
@@ -22,9 +30,9 @@
                     <Button x:Name="HomeButton"
                         Height="60"
                         Width="60"
-                        Background="Transparent"
+                        Background="LightGray"
                         Margin="0,20,0,10"
-                        BorderBrush="LightGray" Click="HomeButton_Click">
+                        BorderBrush="Transparent" Click="HomeButton_Click">
                         <Image Source="Images/Home.png">
 
                         </Image>
@@ -33,9 +41,9 @@
                     <Button x:Name="ProfileButton"
                         Height="60"
                         Width="60"
-                        Background="Transparent"
+                        Background="LightGray"
                         Margin="0,0,0,10"
-                        BorderBrush="LightGray"
+                        BorderBrush="Transparent"
                                 Click="ProfileButton_Click">
                         <Image Source="Images/MörkProfil.png">
 
@@ -45,9 +53,9 @@
                     <Button x:Name="CartButton"
                             Height="60"
                             Width="60"
-                            Background="Transparent"
+                            Background="LightGray"
                             Margin="0,0,0,10"
-                            BorderBrush="LightGray"
+                            BorderBrush="Transparent"
                             Click="CartButton_Click">
                         <Image Source="Images/cart.png">
 
@@ -58,7 +66,7 @@
                     <Button x:Name="Exit"
                         Height="60"
                         Width="60"
-                        Background="Transparent"
+                        Background="LightGray"
                         Margin="0,0,0,10"
                         BorderBrush="LightGray">
                         <Image Source="Images/Exit.png">

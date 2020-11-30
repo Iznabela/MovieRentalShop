@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Store"
         mc:Ignorable="d"
-        Title="MovieWindow" Height="420" Width="350">
+        Title="MovieWindow" Height="440" Width="350" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MovieInfo">
         <!-- Grid definitions -->
         <Grid.ColumnDefinitions>
@@ -23,32 +23,38 @@
         <!-- Login groupbox -->
         <GroupBox x:Name="MovieBox" Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" 
                   Background="WhiteSmoke" BorderBrush="Black" 
-                  BorderThickness="2" Height="400" Width="300"
+                  BorderThickness="2" Height="380" Width="290"
                   Grid.ColumnSpan="1" FontFamily="Segoe Script">
+            <GroupBox.Header>Default</GroupBox.Header>
             <Grid x:Name="BoxGrid">
                 <!-- Grid definitions -->
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="40" />
                     <!-- * the rest of the available width -->
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="90" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="250" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
                 <!-- Username -->
-                <TextBlock x:Name="Genre" Grid.Column="0" Grid.Row="2" Height="20" MaxWidth="80"
-                           FontFamily="Segoe UI Semibold" Margin="5,5,5,5" />
+                <TextBlock x:Name="Genre" Grid.Column="0" Grid.Row="2" Height="20" 
+                           Width="160" FontFamily="Segoe UI Semibold" 
+                           Margin="5,0,5,0" Text="drama|comedy|horror"/>
                 <TextBlock x:Name="Price" Grid.Column="1" Grid.Row="2" Height="20"
-                           Text="69.90" FontFamily="Segoe UI Semibold" Margin="5,5,5,5" />
+                           Width="40" Text="69.90:-" FontFamily="Segoe UI Semibold" 
+                           Margin="5,0,5,0" />
+                <TextBlock x:Name="Score" Grid.Column="2" Grid.Row="2" Height="20" Text="Score: 5.5"
+                           Width="90" FontFamily="Segoe UI Semibold" Margin="5,0,5,0" />
 
                 <!-- Line with gradient brush -->
-                <Rectangle Width="300" Height="10" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3">
+                <Rectangle Width="300" Height="5" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
+                           Margin="0">
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="Black" Offset="0.0" />
@@ -60,32 +66,34 @@
                 </Rectangle>
 
                 <!-- Add to cart or cancel -->
-                <Button x:Name="addButton" Grid.Column="0" Grid.Row="4" Margin="10,20,10,20"
-                        Width="120" Height="30" BorderThickness="0" Grid.ColumnSpan="2" 
-                        FontFamily="Segoe UI Semibold">
+                <Button x:Name="ToCartButton" Grid.Column="0" Grid.Row="4" Margin="10,10,10,10"
+                        Width="80" Height="25" BorderThickness="0" Grid.ColumnSpan="1" 
+                        FontFamily="Segoe UI Semibold" Click="MouseUpToCart">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="10" Background="LightGray">
                                 <TextBlock Text="Add to cart" Foreground="Black"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,0,0" Height="25"
-                                           FontSize="15" FontFamily="Segoe UI Semibold">
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,0,0" FontSize="12" 
+                                           FontFamily="Segoe UI Semibold">
                                 </TextBlock>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
                 <!-- Cancel -->
-                <Button x:Name="cancelButton" Grid.Column="2" Grid.Row="4"
-                        Width="90" Height="30"
-                        BorderThickness="0" FontSize="12" Margin="0,0,0,0">
+                <Button x:Name="cancelButton" Grid.Column="1" Grid.Row="4"
+                        Grid.ColumnSpan="2" Width="60" Height="25"
+                        BorderThickness="0" FontSize="11" Margin="10,10,10,10" Click="MouseUpCancel">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="10" Background="LightGray">
                                 <TextBlock Text="Cancel" Foreground="Black"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,0,0" Height="18"
-                                           FontSize="15" FontFamily="Segoe UI Semibold">
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,0,0"
+                                           FontFamily="Segoe UI Semibold">
                                 </TextBlock>
                             </Border>
                         </ControlTemplate>

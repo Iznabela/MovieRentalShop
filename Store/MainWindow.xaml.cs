@@ -29,7 +29,7 @@ namespace Store
         {
             InitializeComponent();
             State.Movies = API.GetMovieSlice(0, 30);
-            HomeWindow.Children.Clear();            ;
+            HomeWindow.Children.Clear();
             PrintPosters(CreateMovieGrid());
             
         }
@@ -58,7 +58,7 @@ namespace Store
             var y = Grid.GetRow(sender as UIElement);
             int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
-            var movieWindow = new MovieWindow(State.Movies[i]);
+            var movieWindow = new MovieWindow(State.Movies[i], State.User);
             movieWindow.Show();
         }
 

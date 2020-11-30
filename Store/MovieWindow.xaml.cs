@@ -18,7 +18,8 @@ namespace Store
     /// </summary>
     public partial class MovieWindow : Window
     {
-        public MovieWindow(Movie movie)
+
+        public MovieWindow(Movie movie, Customer customer)
         {
             InitializeComponent();
 
@@ -29,19 +30,31 @@ namespace Store
             // getting current poster and printing it in BoxGrid
             var image = new Image() { };
             image.Source = new BitmapImage(new Uri(movie.Poster));
-            image.Height = 180;
-            image.Margin = new Thickness(5, 5, 5, 5);
+            image.Height = 250;
+            image.Margin = new Thickness(0, 5, 0, 5);
             BoxGrid.Children.Add(image);
             Grid.SetRow(image, 1);
             Grid.SetColumn(image, 0);
             Grid.SetColumnSpan(image, 3);
 
             Genre.Text = movie.Genre;
+            Score.Text = "Score: " + movie.IMDBScore.ToString();
 
+            
+        }
 
-            State.PickedMovies.Add(movie);
+        private void MouseUpToCart(object sender, RoutedEventArgs e)
+        {
+            State.PickedMovies.Add(sender);
 
+            
+            
             MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MouseUpCancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

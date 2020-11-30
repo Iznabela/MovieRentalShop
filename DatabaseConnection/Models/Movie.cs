@@ -13,6 +13,11 @@ namespace DatabaseConnection.Models
         public string? Poster { get; set; }
         public double? Price { get; set; }
         public virtual List<Rental> Rentals { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }
 

@@ -52,24 +52,14 @@ namespace Store
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
             //Debugging, den känner inte av vilken kolumn den är i.
             //Kanske känner av i fel grid? 
             var x = Grid.GetColumn(sender as UIElement);
             var y = Grid.GetRow(sender as UIElement);
             int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
-            if (State.PickedMovies.Contains(State.Movies[i]))  //ha dessa funktioner i varukorgen istället
-            {
-                State.PickedMovies.Remove(State.Movies[i]);
-                MessageBox.Show("Removed from basket", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-
-            else
-            {
-                State.PickedMovies.Add(State.Movies[i]);
-                MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            var movieWindow = new MovieWindow(State.Movies[i]);
+            movieWindow.Show();
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)

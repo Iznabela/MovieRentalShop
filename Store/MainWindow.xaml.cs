@@ -65,11 +65,6 @@ namespace Store
                 State.PickedMovies.Add(State.Movies[i]);
                 MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-
-
-
-            
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -150,6 +145,7 @@ namespace Store
                 Name = "updatedMovieGrid",
                 ShowGridLines = true
             };
+
 
             var scrollViewer = new ScrollViewer()
             {
@@ -295,96 +291,28 @@ namespace Store
             //TODO 
             // create stackpanel to put groupbox and separate titletext in
 
-
             int i = 0;
-
-            for (int y = 0; y < movieGrid.RowDefinitions.Count; y++)
+            for (int y = 0; y < MovieGrid.RowDefinitions.Count; y++)
             {
-                for (int x = 0; x < movieGrid.ColumnDefinitions.Count; x++)
+                for (int x = 0; x < MovieGrid.ColumnDefinitions.Count; x++)
                 {
                     if (i < State.Movies.Count)
                     {
                         var movie = State.Movies[i];
                         try
                         {
-                            var image = new Image()
-                            {
-                                VerticalAlignment = VerticalAlignment.Center,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Margin = new Thickness(0, 0, 0, 0),
-                                Height = 170
-                            };
-                            image.Source = new BitmapImage(new Uri(movie.Poster));
-
-                            var bigImage = new Image()
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                Margin = new Thickness(10, 10, 10, 10),
-                                Height = 250
-                            };
-                            bigImage.Source = new BitmapImage(new Uri(movie.Poster));
-
+                            var image = new Image() { };
+                            image.Cursor = Cursors.Hand;
                             image.MouseUp += Image_MouseUp;
+                            image.HorizontalAlignment = HorizontalAlignment.Center;
+                            image.VerticalAlignment = VerticalAlignment.Center;
+                            image.Source = new BitmapImage(new Uri(movie.Poster));
+                            //image.Height = 120;
+                            image.Margin = new Thickness(20, 20, 20, 20);
 
-                            var titleText = new TextBlock()
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Bottom,
-                                Text = movie.Title.ToString(),
-                                FontSize = 12
-                            };
-
-                            var popupTitleText = new TextBlock()
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Top,
-                                Text = movie.Title.ToString()
-                            };
-
-                            var buyButton = new Button()
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Right,
-                                VerticalAlignment = VerticalAlignment.Bottom,
-                                Content = "Buy"
-                            };
-
-                            var infoButton = new Button()
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Left,
-                                VerticalAlignment = VerticalAlignment.Bottom,
-                                Content = "Info"
-                            };
-
-                            var movieBox = new GroupBox()
-                            {
-                                VerticalAlignment = VerticalAlignment.Center,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Height = 230,
-                                Width = 170,
-                            };
-
-                            var movieStack = new StackPanel()
-                            {
-                                VerticalAlignment = VerticalAlignment.Center,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Height = 230,
-                                Width = 170
-                            };
-
-                            movieStack.Children.Add(image);
-
-                            movieStack.Children.Add(titleText);
-
-                            movieBox.Content = movieStack;
-
-                            movieGrid.Children.Add(movieBox);
-
-                            Grid.SetRow(movieBox, y);
-                            Grid.SetColumn(movieBox, x);
-
-                            movieBox.MouseEnter += MovieBoxEnter;
-                            movieBox.MouseLeave += MovieBoxLeave;
+                            movieGrid.Children.Add(image);
+                            Grid.SetRow(image, y);
+                            Grid.SetColumn(image, x);
                         }
                         catch (Exception e) when
                             (e is ArgumentNullException ||
@@ -395,6 +323,8 @@ namespace Store
                         }
                     }
                     i++;
+
+
                 }
             }
         }

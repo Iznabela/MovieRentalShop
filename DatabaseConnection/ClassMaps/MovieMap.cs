@@ -16,7 +16,7 @@ namespace DatabaseConnection.ClassMaps
             Map(m => m.IMDBScore).Name("IMDBScore");
             Map(m => m.Genre).Name("Genre");
             Map(m => m.Poster).Name("Poster");
-            Map(m => m.Price).Name("Price");
+            
         }
     }
 

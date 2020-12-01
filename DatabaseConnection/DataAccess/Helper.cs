@@ -16,6 +16,6 @@ namespace DatabaseConnection.DataAccess
         public static string bellaCustomerData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Customers.csv";
 
         public static string priceData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Price.csv";
-        public static string bellaPriceData = @"";
+        public static string bellaPriceData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Price.csv";
     }
 }

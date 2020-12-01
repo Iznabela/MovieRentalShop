@@ -58,15 +58,10 @@ namespace Store
             var y = Grid.GetRow(sender as UIElement);
             int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
-            var movie = State.Movies[i];
+            State.Pick = State.Movies[i];
 
-            var movieWindow = new MovieWindow(movie);
+            var movieWindow = new MovieWindow();
             movieWindow.Show();
-
-            if (MovieWindow.toCartButtonClicked == true)
-            {
-                State.PickedMovies.Add(movie);
-            }
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -145,7 +140,7 @@ namespace Store
         private Grid CreateMovieGrid()
         {
             var updatedMovieGrid = new Grid()
-            {                
+            {
                 Width = 900,
                 Name = "updatedMovieGrid",
                 ShowGridLines = false

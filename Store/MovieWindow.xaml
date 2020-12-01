@@ -30,7 +30,7 @@
                 <!-- Grid definitions -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160" />
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="55" />
                     <!-- * the rest of the available width -->
                     <ColumnDefinition Width="90" />
                 </Grid.ColumnDefinitions>
@@ -47,7 +47,7 @@
                            Width="160" FontFamily="Segoe UI Semibold" 
                            Margin="5,0,5,0" Text="drama|comedy|horror"/>
                 <TextBlock x:Name="Price" Grid.Column="1" Grid.Row="2" Height="20"
-                           Width="40" Text="69.90:-" FontFamily="Segoe UI Semibold" 
+                           Width="55" Text="69.90:-" FontFamily="Segoe UI Semibold" 
                            Margin="5,0,5,0" />
                 <TextBlock x:Name="Score" Grid.Column="2" Grid.Row="2" Height="20" Text="Score: 5.5"
                            Width="90" FontFamily="Segoe UI Semibold" Margin="5,0,5,0" />

@@ -18,18 +18,19 @@ namespace Store
     /// </summary>
     public partial class MovieWindow : Window
     {
-        public static bool toCartButtonClicked = false;
-        public MovieWindow(Movie movie)
+        public MovieWindow()
         {
             InitializeComponent();
 
             // getting current title and printing as header
-            string title = movie.Title.ToString();
+            string title = State.Pick.Title.ToString();
             MovieBox.Header = title;
+
+
 
             // getting current poster and printing it in BoxGrid
             var image = new Image() { };
-            image.Source = new BitmapImage(new Uri(movie.Poster));
+            image.Source = new BitmapImage(new Uri(State.Pick.Poster));
             image.Height = 250;
             image.Margin = new Thickness(0, 5, 0, 5);
             BoxGrid.Children.Add(image);
@@ -37,8 +38,8 @@ namespace Store
             Grid.SetColumn(image, 0);
             Grid.SetColumnSpan(image, 3);
 
-            Genre.Text = movie.Genre;
-            Score.Text = "Score: " + movie.IMDBScore.ToString();
+            Genre.Text = State.Pick.Genre;
+            Score.Text = "Score: " + State.Pick.IMDBScore.ToString();
 
             var toCartButton = new Button
             {
@@ -48,6 +49,8 @@ namespace Store
                 BorderThickness = new Thickness(0),
                 FontFamily = new FontFamily("Segoe UI Semibold"),
             };
+
+            Price.Text = State.Pick.Price.ToString() + " kr";
 
             var cartButtonText = new TextBlock
             {
@@ -68,7 +71,7 @@ namespace Store
 
         private void ToCartClick(object sender, RoutedEventArgs e)
         {
-            toCartButtonClicked = true;
+            State.PickedMovies.Add(State.Pick);
             MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

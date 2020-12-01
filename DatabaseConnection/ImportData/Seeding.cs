@@ -26,7 +26,7 @@ namespace DatabaseConnection
                 ctx.AddRange(records);
                 ctx.SaveChanges();
             }
-          
+
 
             using (var reader = new StreamReader(Helper.bellaCustomerData))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -35,45 +35,15 @@ namespace DatabaseConnection
                 var records = csv.GetRecords<Customer>();
                 ctx.AddRange(records);
                 ctx.SaveChanges();
-            }            
+            }
 
-
-            //ctx.RemoveRange(ctx.Rentals);
-            //ctx.RemoveRange(ctx.Movies);
-            //ctx.RemoveRange(ctx.Customers);
-
-            //ctx.AddRange(new List<Customer> {
-            //        new Customer { FirstName = "Björn" },
-            //        new Customer { FirstName = "Robin" },
-            //        new Customer { FirstName = "Kalle" },
-            //    });
-
-            //// Här laddas data in från SeedData foldern för att fylla ut Movies tabellen
-            //var movies = new List<Movie>();
-            //var lines = File.ReadAllLines(@"..\..\..\SeedData\MovieGenre.csv");
-            //for (int i = 1; i < 200; i++)
-            //{
-            //    // imdbId,Imdb Link,Title,IMDB Score,Genre,Poster
-            //    var cells = lines[i].Split(',');
-
-            //    var url = cells[5].Trim('"');
-
-            //    // Hoppa över alla icke-fungerande url:er
-            //    try { var test = new Uri(url); }
-            //    catch (Exception) { continue; }
-
-            //    movies.Add(new Movie { Title = cells[2], Poster = url });
-            //}
-            //ctx.AddRange(movies);
-
-            //ctx.SaveChanges();
 
         }
 
 
         public static void ImportOrders(Context ctx)
         {
-            var random = new Random();            
+            var random = new Random();
             var cList = ctx.Customers.ToList();
             var mList = ctx.Movies.ToList();
             var date = new DateTime(2019, 11, 16);
@@ -111,5 +81,44 @@ namespace DatabaseConnection
 
 
         }
+
+        public static void AddPricesToDB(Context ctx)
+        {
+            var mListCount = ctx.Movies.Count();
+            var mList = ctx.Movies.ToList();
+            var pList = new List<Double>();
+            int i = 0;
+
+            using (var reader = new StreamReader(Helper.priceData))
+            {
+
+                while (i < mListCount)
+                {
+                    pList.Add(Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture));
+                    i++;
+
+
+                    if (reader.EndOfStream)
+                    {
+                        reader.DiscardBufferedData();
+                        reader.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                    }
+                }
+            }
+
+
+            for (int j = 0; j < mListCount; j++)
+            {
+                mList[j].Price = pList[j];
+            }
+
+
+            ctx.UpdateRange(mList);
+            ctx.SaveChanges();           
+
+        }
+
+
     }
 }

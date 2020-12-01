@@ -14,7 +14,10 @@ namespace DatabaseConnection
             {
                 Seeding.ImportData(ctx);
                 Seeding.ImportOrders(ctx);
+                Seeding.AddPricesToDB(ctx);
             }
+
+            
 
 
         }

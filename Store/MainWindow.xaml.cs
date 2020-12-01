@@ -27,7 +27,7 @@ namespace Store
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
             State.Movies = API.GetMovieSlice(0, 30);
             HomeWindow.Children.Clear();
             PrintPosters(CreateMovieGrid());
@@ -76,9 +76,23 @@ namespace Store
                 BorderThickness = new Thickness(3),
                 Height = 750,
                 Width = 700,
-                FontFamily = new FontFamily("Segoe Script")
+                FontFamily = new FontFamily("Segoe Script"),
+                
+                
             };
-            HomeWindow.Children.Add(groupBox);
+
+            var border = new Border
+            {
+                Name = "replaceGroupBox",
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                Height = 750,
+                Width = 700,
+                CornerRadius = new CornerRadius(12, 12, 12, 12)                
+            };
+            
+            HomeWindow.Children.Add(border);
+            
 
 
             var stackpanel = new StackPanel
@@ -86,7 +100,7 @@ namespace Store
                 Orientation = Orientation.Vertical
             };
 
-            groupBox.Content = stackpanel;
+            border.Child = stackpanel;
 
             var welcomeMessage = new TextBlock
             {
@@ -95,6 +109,7 @@ namespace Store
                 Text = $"Hello {State.User.UserName}!",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
+                FontFamily = new FontFamily("Segoe Script"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
@@ -106,6 +121,7 @@ namespace Store
                 Text = $"Below you can see your history and currently rented movies.",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
+                FontFamily = new FontFamily("Segoe Script"),
             };
 
             stackpanel.Children.Add(historyMessage);
@@ -197,7 +213,16 @@ namespace Store
         {
             HomeWindow.Children.Clear();
 
-            HomeWindow.Children.Clear();
+            var border = new Border
+            {
+                Name = "replaceGroupBoxInCart",
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                Height = 750,
+                Width = 700,
+                CornerRadius = new CornerRadius(12, 12, 12, 12)
+            };
+
 
             var groupBox = new GroupBox
             {
@@ -209,7 +234,11 @@ namespace Store
                 Width = 700,
                 FontFamily = new FontFamily("Segoe Script")
             };
-            HomeWindow.Children.Add(groupBox);
+
+            HomeWindow.Children.Add(border);
+
+
+
 
 
             var stackpanel = new StackPanel
@@ -218,7 +247,7 @@ namespace Store
                 Orientation = Orientation.Vertical
             };
 
-            groupBox.Content = stackpanel;
+            border.Child = stackpanel;
 
             var welcomeMessage = new TextBlock
             {
@@ -227,6 +256,7 @@ namespace Store
                 Text = $"Hello {State.User.UserName}!",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
+                FontFamily = new FontFamily("Segoe Script"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
@@ -238,6 +268,7 @@ namespace Store
                 Text = $"Below you can see your current cart.",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
+                FontFamily = new FontFamily("Segoe Script"),
             };
 
             stackpanel.Children.Add(infoMessage);

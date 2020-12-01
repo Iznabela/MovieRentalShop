@@ -27,7 +27,7 @@ namespace Store
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
             State.Movies = API.GetMovieSlice(0, 30);
             HomeWindow.Children.Clear();
             PrintPosters(CreateMovieGrid());
@@ -76,9 +76,13 @@ namespace Store
                 BorderThickness = new Thickness(3),
                 Height = 750,
                 Width = 700,
-                FontFamily = new FontFamily("Segoe Script")
-            };
+                FontFamily = new FontFamily("Segoe Script"),
+                
+                
+            };            
+            
             HomeWindow.Children.Add(groupBox);
+            
 
 
             var stackpanel = new StackPanel

@@ -395,6 +395,17 @@ namespace Store
             PrintPosters(CreateMovieGrid());
         }
 
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            State.User.FirstName = "";
+            State.User.LastName = "";
+            State.User.EmailAdress = "";
+            State.User.UserName = "";
+            State.User.Password = "";
 
+            var login = new LoginWindow();
+            login.Show();
+            this.Close();
+        }
     }
 }

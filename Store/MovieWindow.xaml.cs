@@ -32,41 +32,19 @@ namespace Store
             var image = new Image() { };
             image.Source = new BitmapImage(new Uri(State.Pick.Poster));
             image.Height = 250;
-            image.Margin = new Thickness(0, 5, 0, 5);
+            image.Margin = new Thickness(0, 5, 25, 5);
             BoxGrid.Children.Add(image);
             Grid.SetRow(image, 1);
             Grid.SetColumn(image, 0);
-            Grid.SetColumnSpan(image, 3);
+            Grid.SetColumnSpan(image, 4);
 
             Genre.Text = State.Pick.Genre;
             Score.Text = "Score: " + State.Pick.IMDBScore.ToString();
 
-            var toCartButton = new Button
-            {
-                Margin = new Thickness(10, 10, 10, 10),
-                Width = 80,
-                Height = 25,
-                BorderThickness = new Thickness(0),
-                FontFamily = new FontFamily("Segoe UI Semibold"),
-            };
+           
 
             Price.Text = State.Pick.Price.ToString() + " kr";
-
-            var cartButtonText = new TextBlock
-            {
-                Text = "Add to cart",
-                FontSize = 12
-            };
-
-            toCartButton.Content = cartButtonText;
-
-            toCartButton.Cursor = Cursors.Hand;
-            toCartButton.Click += ToCartClick;
-
-            BoxGrid.Children.Add(toCartButton);
-            Grid.SetRow(toCartButton, 4);
-            Grid.SetColumn(toCartButton, 0);
-            Grid.SetColumnSpan(toCartButton, 1);
+            
         }
 
         private void ToCartClick(object sender, RoutedEventArgs e)

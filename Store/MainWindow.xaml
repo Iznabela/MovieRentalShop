@@ -358,7 +358,8 @@
                         Width="60"
                         Background="DarkRed"
                         Margin="0,0,0,10"
-                        BorderBrush="Transparent">
+                        BorderBrush="Transparent"
+                            Click="Exit_Click">
                         <Image Source="Images/Exit.png">
                         </Image>
                     </Button>

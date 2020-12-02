@@ -310,58 +310,160 @@
 
             <Grid Margin="20">
 
-                <StackPanel Width="85"
+                <StackPanel Width="103"
                         HorizontalAlignment="Left"
-                        Background="Black"
-                        Margin="0,0,0,0">
+                        Background="Transparent"
+                        Margin="0,101,0,0">
 
 
 
                     <Button x:Name="HomeButton"
-                        Height="60"
-                        Width="60"
-                        Background="DarkRed"
-                        Margin="0,20,0,10"
-                        BorderBrush="Transparent" Click="HomeButton_Click">
-                        <Image Source="Images/Home.png">
+                        Height="80"
+                        Width="80"
+                        Background="Transparent"                        
+                        Margin="0,85,0,10"                       
+                        BorderBrush="Black" Click="HomeButton_Click">
+                        <Image Source="Images/TransparentHome.png">
 
-                        </Image>
+                        </Image>                    
+                        
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>                                
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">                                                
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="darkred" TargetName="Border" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </Button.Resources>
+
+
 
                     </Button>
                     <Button x:Name="ProfileButton"
-                        Height="60"
-                        Width="60"
-                        Background="DarkRed"
+                        Height="80"
+                        Width="80"
+                        Background="Transparent"
                         Margin="0,0,0,10"
-                        BorderBrush="Transparent"
-                                Click="ProfileButton_Click">
+                        BorderBrush="Black"
+                        Click="ProfileButton_Click">
                         <Image Source="Images/MörkProfil.png">
 
                         </Image>
+
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="darkred" TargetName="Border" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </Button.Resources>
+
                     </Button>
 
                     <Button x:Name="CartButton"
-                            Height="60"
-                            Width="60"
-                            Background="DarkRed"
+                           Height="80"
+                        Width="80"
+                            Background="Transparent"
                             Margin="0,0,0,10"
-                            BorderBrush="Transparent"
+                            BorderBrush="Black"
                             Click="CartButton_Click">
                         <Image Source="Images/cart.png">
 
                         </Image>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="darkred" TargetName="Border" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </Button.Resources>
 
                     </Button>
 
                     <Button x:Name="Exit"
-                        Height="60"
-                        Width="60"
-                        Background="DarkRed"
+                        Height="80"
+                        Width="80"
+                        Background="Transparent"
                         Margin="0,0,0,10"
-                        BorderBrush="Transparent"
+                        BorderBrush="Black"
                             Click="Exit_Click">
                         <Image Source="Images/Exit.png">
                         </Image>
+
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="darkred" TargetName="Border" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </Button.Resources>
                     </Button>
                 </StackPanel>
             </Grid>
@@ -371,10 +473,10 @@
             <Grid Height="100"              
               VerticalAlignment="Top"
               Margin="75,10,0,20">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="-53,0,0,0">
 
                     <Image Source="Images\Header.png"
-                       Width="250"
+                       Width="257"
                        Margin="50,0,20,0">
                     </Image>
                     <Grid Width="400"
@@ -383,8 +485,9 @@
                             <TextBlock Text="Sort by Genre"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                       FontFamily="Segoe Script"/>
+                                        FontSize="16"
+                                       FontFamily="Segoe Script"
+                                       Margin="20,0,10,0"/>
 
                             <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Style="{DynamicResource ComboBoxStyle1}" 
                                       Name="SortByGenre"
@@ -423,6 +526,7 @@
                     <StackPanel Orientation="Horizontal">
 
                         <TextBox x:Name="searchTxt"
+                                    GotKeyboardFocus="searchTxt_GotKeyboardFocus"
                                      TextAlignment="Center"
                                      VerticalAlignment="Center"
                                      Width="200"
@@ -446,12 +550,12 @@
             </Grid>
 
             <!--MainWindow in MainWindow for other windows-->
-            
-              <Grid
+
+            <Grid
               Width="900"              
               x:Name="HomeWindow"
-              Margin="100,100,20,20"> 
-              </Grid>           
+              Margin="100,100,20,20">
+            </Grid>
 
         </Grid>
 

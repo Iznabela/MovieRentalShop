@@ -295,6 +295,10 @@ namespace Store
             gv2.Header = "Price";
             gv.Columns.Add(gv2);
 
+            GridViewColumn gv3 = new GridViewColumn();
+            gv3.Header = "Delete";
+            gv.Columns.Add(gv3);            
+
             lview.ItemsSource = State.PickedMovies;
             lview.View = gv;
 
@@ -310,6 +314,17 @@ namespace Store
 
             buyButton.Click += buybtn_Click;
             stackpanel.Children.Add(buyButton);
+
+
+            // Getting the total price of movies in cart
+            double sum = State.PickedMovies.Sum(c => Convert.ToDouble(c.Price));
+
+            TextBox totalPrice = new TextBox
+            {
+                Text = "Total: " + sum.ToString()
+            };
+
+            stackpanel.Children.Add(totalPrice);
 
         }
 

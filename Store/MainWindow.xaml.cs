@@ -140,21 +140,29 @@ namespace Store
 
         private Grid CreateMovieGrid()
         {
+            var movieBorder = new Border
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(2),
+                CornerRadius = new CornerRadius(10,10,10,10)
+            };
+
             var updatedMovieGrid = new Grid()
             {
-                Width = 900,
+                Width = 950,
                 Name = "updatedMovieGrid",
                 ShowGridLines = false
             };
 
-
             var scrollViewer = new ScrollViewer()
             {
                 Content = updatedMovieGrid,
-                BorderThickness = new Thickness(1),
+                Width = 950
             };
 
-            HomeWindow.Children.Add(scrollViewer);
+            movieBorder.Child = scrollViewer;
+
+            HomeWindow.Children.Add(movieBorder);
 
             var column = 5;
             var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);           
@@ -208,7 +216,6 @@ namespace Store
                 CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
 
-
             var groupBox = new GroupBox
             {
                 Name = "groupboxforcart",
@@ -257,6 +264,7 @@ namespace Store
 
             var lview = new ListView()
             {
+                Name = "Lview",
                 Height = 400,
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -274,11 +282,7 @@ namespace Store
             GridViewColumn gv2 = new GridViewColumn();
             gv2.DisplayMemberBinding = new Binding("Price");
             gv2.Header = "Price";
-            gv.Columns.Add(gv2);
-
-            GridViewColumn gv3 = new GridViewColumn();
-            gv3.Header = "Delete";
-            gv.Columns.Add(gv3);            
+            gv.Columns.Add(gv2);          
 
             lview.ItemsSource = State.PickedMovies;
             lview.View = gv;
@@ -288,7 +292,7 @@ namespace Store
 
             var totalPrice = new TextBlock
             {
-                Text = "Total Price: " + sum.ToString(),
+                Text = "Total Price: " + sum.ToString() + " kr",
                 FontSize = 18,
                 FontFamily = new FontFamily("Segoe UI Semibold"),
                 Margin = new Thickness(47,0,10,0)
@@ -301,16 +305,86 @@ namespace Store
             {
                 Height = 60,
                 Width = 100,
-                HorizontalAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
                 Name = "BuyButton",
                 Content = "Buy",
+                FontSize = 24,
                 Background = Brushes.Black,
-                Foreground = Brushes.LightGray
+                Foreground = Brushes.LightGray,
+                BorderThickness = new Thickness(2),
+                Margin = new Thickness(170,40,0,0)
             };
 
+            var clearButton = new Button
+            {
+                Height = 60,
+                Width = 100,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Center,
+                Name = "ClearButton",
+                Content = "Clear",
+                FontSize = 24,
+                Background = Brushes.Black,
+                Foreground = Brushes.LightGray,
+                BorderThickness = new Thickness(2),
+                Margin = new Thickness(170,40,0,0)
+            };
+
+            var buttonPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal
+            };
+
+            buttonPanel.Children.Add(buyButton);
+            buttonPanel.Children.Add(clearButton);
+
+            stackpanel.Children.Add(buttonPanel);
+
+            // BUY BUTTON EVENTS
+            buyButton.MouseEnter += BuyButton_MouseEnter;
+            buyButton.MouseLeave += BuyButton_MouseLeave;
+            buyButton.Cursor = Cursors.Hand;
             buyButton.Click += buybtn_Click;
-            stackpanel.Children.Add(buyButton);
+
+            // CLEAR BUTTON EVENTS
+            clearButton.MouseEnter += ClearButton_MouseEnter;
+            clearButton.MouseLeave += ClearButton_MouseLeave;
+            clearButton.Cursor = Cursors.Hand;
+            clearButton.Click += ClearButton_Click;
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < State.PickedMovies.Count; i++)
+            {
+                State.PickedMovies.RemoveAt(i);
+                CartButton_Click(sender, e);
+            }
+        }
+
+        private void ClearButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            button.Background = Brushes.Black;
+        }
+
+        private void ClearButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            button.Background = Brushes.Red;
+        }
+
+        private void BuyButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            button.Background = Brushes.Black;
+        }
+
+        private void BuyButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            button.Background = Brushes.Red;
         }
 
 
@@ -344,18 +418,47 @@ namespace Store
                         var movie = State.Movies[i];
                         try
                         {
+                            // adding MOVIE POSTERS
                             var image = new Image() { };
                             image.Cursor = Cursors.Hand;
                             image.MouseUp += Image_MouseUp;
                             image.HorizontalAlignment = HorizontalAlignment.Center;
                             image.VerticalAlignment = VerticalAlignment.Center;
                             image.Source = new BitmapImage(new Uri(movie.Poster));
-                            //image.Height = 120;
-                            image.Margin = new Thickness(20, 20, 20, 20);
+                            image.Height = 150;
+                            image.Margin = new Thickness(0, 20, 0, 20);
 
-                            movieGrid.Children.Add(image);
-                            Grid.SetRow(image, y);
-                            Grid.SetColumn(image, x);
+                            var movieBorder = new Border
+                            {
+                                BorderBrush = Brushes.Black,
+                                BorderThickness = new Thickness(2),
+                                CornerRadius = new CornerRadius(10,10,10,10)
+                            };
+
+                            // adding MOVIE TITELS
+                            var titleBlock = new TextBlock
+                            {
+                                Text = State.Movies[i].Title,
+                                FontFamily = new FontFamily("Segoe UI Semibold"),
+                                FontSize = 12,
+                                Margin = new Thickness(3,3,3,3),
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
+
+
+                            var movieTitlePanel = new StackPanel();
+
+                            movieTitlePanel.Children.Add(image);
+                            movieTitlePanel.Children.Add(titleBlock);
+
+                            movieBorder.Child = movieTitlePanel;
+
+                            movieGrid.Children.Add(movieBorder);
+
+                           
+
+                            Grid.SetRow(movieBorder, y);
+                            Grid.SetColumn(movieBorder, x);
                             i++;
                         }
                         catch (Exception e) when

@@ -325,15 +325,15 @@
                         BorderBrush="Black" Click="HomeButton_Click">
                         <Image Source="Images/TransparentHome.png">
 
-                        </Image>                    
-                        
+                        </Image>
+
                         <Button.Resources>
                             <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>                                
+                                <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border x:Name="Border" Background="{TemplateBinding Background}">                                                
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
@@ -550,17 +550,11 @@
             </Grid>
 
             <!--MainWindow in MainWindow for other windows-->
-
             <Grid
-              Width="900"              
+              Width="950"              
               x:Name="HomeWindow"
-              Margin="100,100,20,20">
+              Margin="100,100,20,20" >
             </Grid>
-
         </Grid>
-
-
-
-
     </Grid>
 </Window>

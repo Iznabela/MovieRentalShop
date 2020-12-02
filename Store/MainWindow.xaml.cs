@@ -22,16 +22,12 @@ namespace Store
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        
-
         public MainWindow()
         {
             InitializeComponent();            
             State.Movies = API.GetMovieSlice(0, 30);
             HomeWindow.Children.Clear();
-            PrintPosters(CreateMovieGrid());
-            
+            PrintPosters(CreateMovieGrid());            
         }
 
         // when hovering over a movie poster
@@ -72,7 +68,7 @@ namespace Store
             {
                 Name = "ProfileBorder",
                 BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(4),
+                BorderThickness = new Thickness(3),
                 Height = 750,
                 Width = 700,
                 CornerRadius = new CornerRadius(12, 12, 12, 12)                
@@ -90,49 +86,46 @@ namespace Store
             var welcomeMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Text = $"Hello {State.User.UserName}!",
-                FontSize = 20,
-                Margin = new Thickness(0, 20, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Text = $"Hi {State.User.UserName.ToUpper()}!",
+                FontSize = 18,
+                Margin = new Thickness(47, 20, 0, 0),
                 FontFamily = new FontFamily("Segoe UI Semibold"),
+                FontStyle = FontStyles.Italic,
+                Foreground = Brushes.Black
             };
-
-            welcomeMessage.Foreground = Brushes.White;
 
             stackpanel.Children.Add(welcomeMessage);
 
             var historyMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 Text = $"Below you can see your history and currently rented movies.",
-                FontSize = 20,
-                Margin = new Thickness(0, 20, 0, 0),
+                FontSize = 18,
+                Margin = new Thickness(47, 20, 0, 0),
                 FontFamily = new FontFamily("Segoe UI Semibold"),
+                Foreground = Brushes.Black,
+                FontStyle = FontStyles.Italic
             };
-
-            historyMessage.Foreground = Brushes.White;
 
             stackpanel.Children.Add(historyMessage);
 
-
-
             var dataGrid = new DataGrid
             {
-                Height = 500,
-                Width = 650,
+                Height = 400,
+                Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 20, 0, 0),
                 DataContext = State.Movies, ////ändra sedan, bara för test
-                BorderThickness = new Thickness(5)
+                Foreground = Brushes.Black,
+                Background = Brushes.GhostWhite,
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Black
             };
 
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
-            dataGrid.Foreground = Brushes.Black;
-            stackpanel.Background = Brushes.Black;
-            dataGrid.BorderBrush = Brushes.DarkGray;
-
         }
 
 
@@ -212,7 +205,7 @@ namespace Store
                 BorderThickness = new Thickness(3),
                 Height = 750,
                 Width = 700,
-                CornerRadius = new CornerRadius(12, 12, 12, 12)
+                CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
 
 
@@ -229,10 +222,6 @@ namespace Store
 
             HomeWindow.Children.Add(border);
 
-
-
-
-
             var stackpanel = new StackPanel
             {
                 Name = "CartStack",
@@ -244,11 +233,11 @@ namespace Store
             var welcomeMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Text = $"Hello {State.User.UserName}!",
-                FontSize = 20,
-                Margin = new Thickness(0, 20, 0, 0),
-                FontFamily = new FontFamily("Segoe Script"),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Text = $"Hi {State.User.UserName.ToUpper()}!",
+                FontSize = 18,
+                Margin = new Thickness(47, 20, 0, 0),
+                FontFamily = new FontFamily("Segoe UI Semibold"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
@@ -256,11 +245,11 @@ namespace Store
             var infoMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 Text = $"Below you can see your current cart.",
-                FontSize = 20,
-                Margin = new Thickness(0, 20, 0, 0),
-                FontFamily = new FontFamily("Segoe Script"),
+                FontSize = 18,
+                Margin = new Thickness(47, 20, 0, 20),
+                FontFamily = new FontFamily("Segoe UI Semibold"),
             };
 
             stackpanel.Children.Add(infoMessage);
@@ -294,30 +283,34 @@ namespace Store
             lview.ItemsSource = State.PickedMovies;
             lview.View = gv;
 
-            var buyButton = new Button
-            {
-                Height = 100,
-                Width = 100,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Name = "BuyButton",
-                Content = "Buy"
-            };
-
-            buyButton.Click += buybtn_Click;
-            stackpanel.Children.Add(buyButton);
-
-
-            // Getting the total price of movies in cart
+            // TOTAL PRICE of movies in cart
             double sum = State.PickedMovies.Sum(c => Convert.ToDouble(c.Price));
 
-            TextBox totalPrice = new TextBox
+            var totalPrice = new TextBlock
             {
-                Text = "Total: " + sum.ToString()
+                Text = "Total Price: " + sum.ToString(),
+                FontSize = 18,
+                FontFamily = new FontFamily("Segoe UI Semibold"),
+                Margin = new Thickness(47,0,10,0)
             };
 
             stackpanel.Children.Add(totalPrice);
 
+            // BUYBUTTON with clickevent
+            var buyButton = new Button
+            {
+                Height = 60,
+                Width = 100,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Name = "BuyButton",
+                Content = "Buy",
+                Background = Brushes.Black,
+                Foreground = Brushes.LightGray
+            };
+
+            buyButton.Click += buybtn_Click;
+            stackpanel.Children.Add(buyButton);
         }
 
 

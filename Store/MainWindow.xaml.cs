@@ -68,33 +68,18 @@ namespace Store
         {
             HomeWindow.Children.Clear();
 
-            var groupBox = new GroupBox
-            {
-                Name = "groupbox",
-                Header = "Profile Information",
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(3),
-                Height = 750,
-                Width = 700,
-                FontFamily = new FontFamily("Segoe Script"),
-                
-                
-            };
-
             var border = new Border
             {
-                Name = "replaceGroupBox",
+                Name = "ProfileBorder",
                 BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(3),
+                BorderThickness = new Thickness(4),
                 Height = 750,
                 Width = 700,
                 CornerRadius = new CornerRadius(12, 12, 12, 12)                
             };
             
             HomeWindow.Children.Add(border);
-            
-
-
+ 
             var stackpanel = new StackPanel
             {
                 Orientation = Orientation.Vertical
@@ -109,8 +94,10 @@ namespace Store
                 Text = $"Hello {State.User.UserName}!",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
-                FontFamily = new FontFamily("Segoe Script"),
+                FontFamily = new FontFamily("Segoe UI Semibold"),
             };
+
+            welcomeMessage.Foreground = Brushes.White;
 
             stackpanel.Children.Add(welcomeMessage);
 
@@ -121,8 +108,10 @@ namespace Store
                 Text = $"Below you can see your history and currently rented movies.",
                 FontSize = 20,
                 Margin = new Thickness(0, 20, 0, 0),
-                FontFamily = new FontFamily("Segoe Script"),
+                FontFamily = new FontFamily("Segoe UI Semibold"),
             };
+
+            historyMessage.Foreground = Brushes.White;
 
             stackpanel.Children.Add(historyMessage);
 
@@ -134,12 +123,15 @@ namespace Store
                 Width = 650,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 20, 0, 0),
-                DataContext = State.Movies ////ändra sedan, bara för test
+                DataContext = State.Movies, ////ändra sedan, bara för test
+                BorderThickness = new Thickness(5)
             };
 
-            DataGridTextColumn titleColumn = new DataGridTextColumn();
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
+            dataGrid.Foreground = Brushes.Black;
+            stackpanel.Background = Brushes.Black;
+            dataGrid.BorderBrush = Brushes.DarkGray;
 
         }
 

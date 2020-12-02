@@ -407,5 +407,13 @@ namespace Store
             login.Show();
             this.Close();
         }
+
+        private void searchTxt_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (searchTxt.Text == "Search for Title")
+            {
+                searchTxt.Text = string.Empty;
+            }
+        }
     }
 }

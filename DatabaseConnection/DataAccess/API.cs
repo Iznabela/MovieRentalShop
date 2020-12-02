@@ -22,7 +22,7 @@ namespace DatabaseConnection
         {
             return ctx.Movies.OrderBy(m => m.Title)
                 .Skip(a)
-                .Take(b)
+                .Take(30)
                 .ToList();
         }
 

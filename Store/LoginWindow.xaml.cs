@@ -42,14 +42,14 @@ namespace Store
                 else
                 {
                     MessageBox.Show("Password did not match user - please try again!");
-                    passwordText.Password = "...";
+                    passwordText.Password = "";
                 }
             }
             else
             {
                 MessageBox.Show("User not found - please create an account!");
-                userNameText.Text = "...";
-                passwordText.Password = "...";
+                userNameText.Text = "";
+                passwordText.Password = "";
             }
         }
 

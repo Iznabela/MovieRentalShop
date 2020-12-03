@@ -69,7 +69,7 @@ namespace Store
                 Name = "ProfileBorder",
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
-                Height = 750,
+                Height = 400,
                 Width = 700,
                 CornerRadius = new CornerRadius(12, 12, 12, 12)                
             };
@@ -113,7 +113,7 @@ namespace Store
 
             var dataGrid = new DataGrid
             {
-                Height = 400,
+                Height = 200,
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 20, 0, 0),
@@ -121,11 +121,16 @@ namespace Store
                 Foreground = Brushes.Black,
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black
+                BorderBrush = Brushes.Black,
+                
             };
+
+
+
 
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
+           
         }
 
 
@@ -211,22 +216,12 @@ namespace Store
                 Name = "replaceGroupBoxInCart",
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
-                Height = 750,
+                Height = 450,
                 Width = 700,
                 CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
 
-            var groupBox = new GroupBox
-            {
-                Name = "groupboxforcart",
-                Header = "Cart",
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(3),
-                Height = 750,
-                Width = 700,
-                FontFamily = new FontFamily("Segoe Script")
-            };
-
+           
             HomeWindow.Children.Add(border);
 
             var stackpanel = new StackPanel
@@ -240,34 +235,25 @@ namespace Store
             var welcomeMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Text = $"Hi {State.User.UserName.ToUpper()}!",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Hi {State.User.UserName.ToUpper()}! Current items in your cart.",
                 FontSize = 18,
-                Margin = new Thickness(47, 20, 0, 0),
+                Margin = new Thickness(0, 20, 0, 20),
                 FontFamily = new FontFamily("Segoe UI Semibold"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
 
-            var infoMessage = new TextBlock
-            {
-                TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Text = $"Below you can see your current cart.",
-                FontSize = 18,
-                Margin = new Thickness(47, 20, 0, 20),
-                FontFamily = new FontFamily("Segoe UI Semibold"),
-            };
-
-            stackpanel.Children.Add(infoMessage);
-
+           
+          
             var lview = new ListView()
             {
                 Name = "Lview",
-                Height = 400,
+                Height = 250,
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
+                
             };
             stackpanel.Children.Add(lview);
             lview.SetValue(Grid.RowProperty, 2);
@@ -277,11 +263,20 @@ namespace Store
             gv1.DisplayMemberBinding = new Binding("Title");
             gv1.Header = "Title";
             gv.Columns.Add(gv1);
+            gv1.Width = 550;
+
+            
+
+            
+            
+            
+            
 
             GridViewColumn gv2 = new GridViewColumn();
             gv2.DisplayMemberBinding = new Binding("Price");
             gv2.Header = "Price";
-            gv.Columns.Add(gv2);          
+            gv.Columns.Add(gv2);
+            gv2.Width = 50;
 
             lview.ItemsSource = State.PickedMovies;
             lview.View = gv;
@@ -294,7 +289,8 @@ namespace Store
                 Text = "Total Price: " + sum.ToString() + " kr",
                 FontSize = 18,
                 FontFamily = new FontFamily("Segoe UI Semibold"),
-                Margin = new Thickness(47,0,10,0)
+                Margin = new Thickness(0,0,50,0),
+                HorizontalAlignment = HorizontalAlignment.Right
             };
 
             stackpanel.Children.Add(totalPrice);
@@ -302,13 +298,13 @@ namespace Store
             // BUYBUTTON with clickevent
             var buyButton = new Button
             {
-                Height = 60,
-                Width = 100,
+                Height = 30,
+                Width = 75,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
                 Name = "BuyButton",
                 Content = "Buy",
-                FontSize = 24,
+                FontSize = 16,
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
@@ -317,13 +313,13 @@ namespace Store
 
             var clearButton = new Button
             {
-                Height = 60,
-                Width = 100,
+                Height = 30,
+                Width = 75,
                 HorizontalAlignment = HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Center,
                 Name = "ClearButton",
                 Content = "Clear",
-                FontSize = 24,
+                FontSize = 16,
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),

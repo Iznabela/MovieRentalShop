@@ -50,8 +50,8 @@ namespace Store
         {
             //Debugging, den känner inte av vilken kolumn den är i.
             //Kanske känner av i fel grid? 
-            var x = Grid.GetColumn(sender as UIElement);
-            var y = Grid.GetRow(sender as UIElement);
+            var x = (sender as PosterImage).X;
+            var y = (sender as PosterImage).Y;
             int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
 
             State.Pick = State.Movies[i];
@@ -419,7 +419,11 @@ namespace Store
                         try
                         {
                             // adding MOVIE POSTERS
-                            var image = new Image() { };
+                            var image = new PosterImage()
+                            {
+                                X = x,
+                                Y = y
+                            };
                             image.Cursor = Cursors.Hand;
                             image.MouseUp += Image_MouseUp;
                             image.HorizontalAlignment = HorizontalAlignment.Center;
@@ -511,5 +515,11 @@ namespace Store
                 searchTxt.Text = string.Empty;
             }
         }
+    }
+
+    public class PosterImage : Image
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }

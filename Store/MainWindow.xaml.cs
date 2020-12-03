@@ -121,7 +121,7 @@ namespace Store
                 Foreground = Brushes.Black,
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black,               
+                BorderBrush = Brushes.Black,
 
             };
 
@@ -129,8 +129,8 @@ namespace Store
 
 
             stackpanel.Children.Add(dataGrid);
-            dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
-            
+            dataGrid.ItemsSource = API.rentalsHistory(State.User);
+
 
         }
 
@@ -352,6 +352,7 @@ namespace Store
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            // State.PickedMovies.Clear();
             var listLength = State.PickedMovies.Count;
             for (int i = 0; i < listLength; i++)
             {
@@ -384,7 +385,6 @@ namespace Store
             button.Background = Brushes.Red;
         }
 
-
         /// <summary>
         /// BuyButton for the Cart
         /// </summary>
@@ -397,7 +397,7 @@ namespace Store
             MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
-            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            //State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
             CartButton_Click(sender, e);
 
         }

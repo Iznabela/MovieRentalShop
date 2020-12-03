@@ -36,7 +36,6 @@ namespace DatabaseConnection
         {
             try
             {
-
                 ctx.Add(new Rental() { Date = DateTime.Now, Customer = customer, Movies = movies });
                 bool one_record_added = ctx.SaveChanges() == 1;
                 return one_record_added;
@@ -56,16 +55,17 @@ namespace DatabaseConnection
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static IEnumerable rentalsHistory(int id)
+        public static IEnumerable rentalsHistory(Customer customer)
         {
 
 
             var rh = new List<RentalHistory>();
 
-            var rentals = ctx.Rentals
-                .Where(m => m.Customer.Id == id)
-                .Include(c => c.Movies)
-                .ToList();
+            var rentals = customer.Rentals;
+                //.Where(m => m.Customer == customer)
+                //.Include(c => c.Movies)
+                //.ToList();
+
 
 
             foreach (var obj in rentals)

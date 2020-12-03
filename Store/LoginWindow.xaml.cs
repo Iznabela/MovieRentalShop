@@ -22,8 +22,14 @@ namespace Store
         public LoginWindow()
         {
             InitializeComponent();
+
+            submitButton.MouseEnter += SubmitButton_MouseEnter;
         }
 
+        private void SubmitButton_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            submitButton.Background = Brushes.DarkRed;
+        }
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             using var ctx = new Context();
@@ -58,7 +64,6 @@ namespace Store
             var registerWindow = new RegisterWindow();
             registerWindow.Show();
             this.Close();
-            
         }
     }
 }

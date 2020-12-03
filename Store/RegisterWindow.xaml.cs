@@ -100,5 +100,10 @@ namespace Store
             loginWindow.Show();
             this.Close();
         }
+
+        private void registerButton2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

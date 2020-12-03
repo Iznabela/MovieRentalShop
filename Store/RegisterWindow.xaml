@@ -55,7 +55,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <!-- * the rest of the available width -->
-            <ColumnDefinition Width="*" />            
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -79,74 +79,73 @@
                   Height="100" Width="500" BorderThickness="0">
             <StackPanel>
                 <Image Source="Images/header.png" 
-                   Stretch="Uniform" />
+                       Stretch="Uniform" />
             </StackPanel>
         </GroupBox>
 
         <!-- Login groupbox -->
-        <GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Column="1" Grid.Row="2" Margin="10,0,10,10" 
+        <GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Column="1" 
+                  Grid.Row="2" Margin="10,0,10,10" 
                   Background="Transparent" BorderBrush="Black" 
-                  BorderThickness="3" Height="400" Width="430"
-                  Grid.ColumnSpan="2" FontFamily="Segoe Script">
+                  BorderThickness="3" Height="400" Width="300"
+                  Grid.ColumnSpan="2" FontFamily="Segoe UI" FontSize="18">
             <GroupBox.Header>Register Account</GroupBox.Header>
 
-
-
-            
             <StackPanel x:Name="accountInfo" Orientation="Vertical" Grid.Column="1" Grid.Row="1" Background="Transparent">
 
                 <!-- First Name -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="First Name" FontFamily="Segoe UI" 
-                           FontWeight="SemiBold" Margin="10,10,0,0"/>
+                           Margin="10,15,0,0" FontSize="14"/>
 
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <TextBox x:Name="rFirstNameText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
-                     HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="Transparent" FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
-
+                    <TextBox x:Name="rFirstNameText" VerticalAlignment="Center" 
+                             VerticalContentAlignment="Center" HorizontalAlignment="Center" 
+                             Width="140" Height="25" Margin="0,0,0,0"
+                             BorderThickness="0" Background="Transparent" 
+                             FontFamily="Segoe UI" HorizontalContentAlignment="Center"/>
                 </Border>
 
                 <!-- Last Name -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="Last Name: " FontFamily="Segoe UI" 
-                           FontWeight="SemiBold" Margin="10,10,0,0" Background="Transparent"/>
+                           Margin="10,10,0,0" Background="Transparent"
+                           FontSize="14"/>
 
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
                     <TextBox x:Name="rLastNameText" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="Transparent" FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
-
+                             HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
+                             BorderThickness="0" Background="Transparent" 
+                             FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
                 </Border>
 
                 <!-- Email Adress -->
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="Email Adress: " FontFamily="Segoe UI" 
-                           FontWeight="SemiBold" Margin="10,10,0,0"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="14" 
+                           VerticalAlignment="Center" Text="Email Adress: " 
+                           FontFamily="Segoe UI" Margin="10,10,0,0"/>
 
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
-                    <TextBox x:Name="rEmailAdressText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
-                     HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="Transparent" FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
-
+                    <TextBox x:Name="rEmailAdressText" VerticalAlignment="Center" 
+                             VerticalContentAlignment="Center" HorizontalAlignment="Center" 
+                             Width="140" Height="25" Margin="0,0,0,0" BorderThickness="0" 
+                             Background="Transparent" FontFamily="Segoe UI" 
+                             HorizontalContentAlignment="Center"/>
                 </Border>
-
-
-
+                
                 <!-- Username -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="Username:" FontFamily="Segoe UI Semibold" 
-                           FontWeight="SemiBold" Margin="10,10,0,0"/>
+                           Text="Username:" FontFamily="Segoe UI" 
+                           Margin="10,10,0,0" FontSize="14"/>
 
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
-                    
+
                     <TextBox x:Name="ruserNameText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
                              HorizontalAlignment="Left" TextAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
                              BorderThickness="0" Background="Transparent" FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
@@ -154,64 +153,60 @@
 
                 <!-- Password -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Text="Password:" FontFamily="Segoe UI Semibold" 
-                           FontWeight="SemiBold" Margin="10,10,0,0"/>
-                
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                           Text="Password:" FontFamily="Segoe UI" 
+                           Margin="10,10,0,0" FontSize="14"/>
+
+                <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
                     <PasswordBox x:Name="rpasswordText" VerticalAlignment="Center" VerticalContentAlignment="Center" 
-                     HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
-                     BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Center"/>
-                    
+                                 HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
+                                 BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Center"/>
                 </Border>
 
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                <!-- Register Account Button-->
-                <Button x:Name="registerButton" HorizontalAlignment="Center" 
-                        VerticalAlignment="Bottom" Margin="10,20,10,20" 
+                    <!-- Register Account Button-->
+                    <Button x:Name="registerButton" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Margin="10,20,10,20" 
                         BorderThickness="0" Click="registerButton_Click" 
-                        FontFamily="Segoe UI Semibold">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="Black">
-                                <TextBlock Text="Register" Foreground="Gray"
+                        FontFamily="Segoe UI Semibold" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="15" Background="Black">
+                                    <TextBlock Text="Register" Foreground="LightGray"
                                            HorizontalAlignment="Center"
                                            Margin="20,2,20,2" Height="25"
-                                           FontSize="15" FontFamily="Segoe Script">
-                                </TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                
-                
-                
+                                           FontSize="15" FontFamily="Segoe UI">
+                                    </TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
 
-                <Button x:Name="cancelButton" HorizontalAlignment="Center" 
+                    <Button x:Name="cancelButton" HorizontalAlignment="Center" 
                         VerticalAlignment="Bottom" Margin="10,20,10,20" 
                         BorderThickness="0" Click="cancelButton_Click" 
-                        FontFamily="Segoe UI Semibold">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="Black">
-                                    <TextBlock Text="Cancel" Foreground="Gray"
+                        FontFamily="Segoe UI Semibold" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="15" Background="Black">
+                                    <TextBlock Text="Cancel" Foreground="LightGray"
                                            HorizontalAlignment="Center"
                                            Margin="20,2,20,2" Height="25"
-                                           FontSize="15" FontFamily="Segoe Script"
+                                           FontSize="15" FontFamily="Segoe UI"
                                            >
-                                </TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                                    </TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </WrapPanel>
 
 
             </StackPanel>
-            
-           
+
+
 
         </GroupBox>
 

@@ -261,7 +261,6 @@ namespace Store
 
             stackpanel.Children.Add(infoMessage);
 
-
             var lview = new ListView()
             {
                 Name = "Lview",
@@ -356,11 +355,12 @@ namespace Store
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < State.PickedMovies.Count; i++)
+            var listLength = State.PickedMovies.Count;
+            for (int i = 0; i < listLength; i++)
             {
-                State.PickedMovies.RemoveAt(i);
-                CartButton_Click(sender, e);
+                State.PickedMovies.RemoveAt(0);
             }
+            CartButton_Click(sender, e);
         }
 
         private void ClearButton_MouseLeave(object sender, MouseEventArgs e)

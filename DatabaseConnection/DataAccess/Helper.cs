@@ -6,16 +6,16 @@ namespace DatabaseConnection.DataAccess
 {
     public static class Helper
     {
-        public static string BellaConnString = @"server=.; database=SaleDatabase; trusted_connection=true;MultipleActiveResultSets=True";
-        public static string FredrikConnString = @"Data Source=(localdb)\MSSQLLocalDB;Database = SaleDatabase; Trusted_Connection = Yes";
+        //Replace this string with your own.
+        public static string ConnString = @"Data Source=(localdb)\MSSQLLocalDB;Database = SaleDatabase; Trusted_Connection = Yes";
 
-        public static string movieData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Movies.csv";
-        public static string customerData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Customers.csv";
+        //Bella Connection string: @"server=.; database=SaleDatabase; trusted_connection=true;MultipleActiveResultSets=True";
+        //Fredrik Connction string: @"Data Source=(localdb)\MSSQLLocalDB;Database = SaleDatabaseTest; Trusted_Connection = Yes";
 
-        public static string bellaMovieData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Movies.csv";
-        public static string bellaCustomerData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Customers.csv";
+        public static string movieData = @"..\\netcoreapp3.1\\ImportData\\Movies.csv";
+        public static string customerData = @"..\\netcoreapp3.1\\ImportData\\Customers.csv";
+        public static string priceData = @"..\\netcoreapp3.1\\ImportData\\Price.csv";
+ 
 
-        public static string priceData = @"C:\Users\fredr\source\repos\MovieRentalShop\DatabaseConnection\ImportData\Price.csv";
-        public static string bellaPriceData = @"C:\Users\isabe\source\repos\ProjektHyrfilm\DatabaseConnection\ImportData\Price.csv";
     }
 }

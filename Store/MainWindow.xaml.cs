@@ -24,10 +24,10 @@ namespace Store
     {
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
             State.Movies = API.GetMovieSlice(0, 30);
             HomeWindow.Children.Clear();
-            PrintPosters(CreateMovieGrid());            
+            PrintPosters(CreateMovieGrid());
         }
 
         // when hovering over a movie poster
@@ -69,13 +69,13 @@ namespace Store
                 Name = "ProfileBorder",
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
-                Height = 750,
+                Height = 400,
                 Width = 700,
-                CornerRadius = new CornerRadius(12, 12, 12, 12)                
+                CornerRadius = new CornerRadius(12, 12, 12, 12)
             };
-            
+
             HomeWindow.Children.Add(border);
- 
+
             var stackpanel = new StackPanel
             {
                 Orientation = Orientation.Vertical
@@ -113,7 +113,7 @@ namespace Store
 
             var dataGrid = new DataGrid
             {
-                Height = 400,
+                Height = 200,
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 20, 0, 0),
@@ -121,11 +121,17 @@ namespace Store
                 Foreground = Brushes.Black,
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black
+                BorderBrush = Brushes.Black,               
+
             };
+
+
+
 
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
+            
+
         }
 
 
@@ -144,7 +150,7 @@ namespace Store
             {
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(2),
-                CornerRadius = new CornerRadius(10,10,10,10)
+                CornerRadius = new CornerRadius(10, 10, 10, 10)
             };
 
             var updatedMovieGrid = new Grid()
@@ -165,7 +171,7 @@ namespace Store
             HomeWindow.Children.Add(movieBorder);
 
             var column = 5;
-            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);           
+            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);
 
 
             for (int j = 0; j < column; j++)
@@ -178,9 +184,9 @@ namespace Store
             }
 
             for (int i = 0; i < row; i++)
-            {            
-                
-                
+            {
+
+
                 var rowDefinition = new RowDefinition()
                 {
 
@@ -189,7 +195,7 @@ namespace Store
                 rowDefinition.Height = new GridLength(230);
 
                 updatedMovieGrid.RowDefinitions.Add(rowDefinition);
-                              
+
             }
 
             State.currentGrid = updatedMovieGrid;
@@ -211,21 +217,11 @@ namespace Store
                 Name = "replaceGroupBoxInCart",
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
-                Height = 750,
+                Height = 450,
                 Width = 700,
                 CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
 
-            var groupBox = new GroupBox
-            {
-                Name = "groupboxforcart",
-                Header = "Cart",
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(3),
-                Height = 750,
-                Width = 700,
-                FontFamily = new FontFamily("Segoe Script")
-            };
 
             HomeWindow.Children.Add(border);
 
@@ -240,34 +236,25 @@ namespace Store
             var welcomeMessage = new TextBlock
             {
                 TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Text = $"Hi {State.User.UserName.ToUpper()}!",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Text = $"Hi {State.User.UserName.ToUpper()}! Current items in your cart.",
                 FontSize = 18,
-                Margin = new Thickness(47, 20, 0, 0),
+                Margin = new Thickness(0, 20, 0, 20),
                 FontFamily = new FontFamily("Segoe UI Semibold"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
 
-            var infoMessage = new TextBlock
-            {
-                TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Text = $"Below you can see your current cart.",
-                FontSize = 18,
-                Margin = new Thickness(47, 20, 0, 20),
-                FontFamily = new FontFamily("Segoe UI Semibold"),
-            };
 
-            stackpanel.Children.Add(infoMessage);
 
             var lview = new ListView()
             {
                 Name = "Lview",
-                Height = 400,
+                Height = 250,
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
+
             };
             stackpanel.Children.Add(lview);
             lview.SetValue(Grid.RowProperty, 2);
@@ -277,11 +264,20 @@ namespace Store
             gv1.DisplayMemberBinding = new Binding("Title");
             gv1.Header = "Title";
             gv.Columns.Add(gv1);
+            gv1.Width = 550;
+
+
+
+
+
+
+
 
             GridViewColumn gv2 = new GridViewColumn();
             gv2.DisplayMemberBinding = new Binding("Price");
             gv2.Header = "Price";
-            gv.Columns.Add(gv2);          
+            gv.Columns.Add(gv2);
+            gv2.Width = 50;
 
             lview.ItemsSource = State.PickedMovies;
             lview.View = gv;
@@ -294,7 +290,8 @@ namespace Store
                 Text = "Total Price: " + sum.ToString() + " kr",
                 FontSize = 18,
                 FontFamily = new FontFamily("Segoe UI Semibold"),
-                Margin = new Thickness(47,0,10,0)
+                Margin = new Thickness(0, 0, 50, 0),
+                HorizontalAlignment = HorizontalAlignment.Right
             };
 
             stackpanel.Children.Add(totalPrice);
@@ -302,32 +299,32 @@ namespace Store
             // BUYBUTTON with clickevent
             var buyButton = new Button
             {
-                Height = 60,
-                Width = 100,
+                Height = 30,
+                Width = 75,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
                 Name = "BuyButton",
                 Content = "Buy",
-                FontSize = 24,
+                FontSize = 16,
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170,40,0,0)
+                Margin = new Thickness(170, 40, 0, 0)
             };
 
             var clearButton = new Button
             {
-                Height = 60,
-                Width = 100,
+                Height = 30,
+                Width = 75,
                 HorizontalAlignment = HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Center,
                 Name = "ClearButton",
                 Content = "Clear",
-                FontSize = 24,
+                FontSize = 16,
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170,40,0,0)
+                Margin = new Thickness(170, 40, 0, 0)
             };
 
             var buttonPanel = new StackPanel
@@ -396,10 +393,13 @@ namespace Store
         private void buybtn_Click(object sender, RoutedEventArgs e)
         {
             //Använd kod i varukorg
-            if (API.RegisterSale(State.User, State.PickedMovies))
-                MessageBox.Show("Added to your basket.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
-            else
-                MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            API.RegisterSale(State.User, State.PickedMovies);
+            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            CartButton_Click(sender, e);
+
         }
 
         // Printing movie posters in movie grid
@@ -436,7 +436,7 @@ namespace Store
                             {
                                 BorderBrush = Brushes.Black,
                                 BorderThickness = new Thickness(2),
-                                CornerRadius = new CornerRadius(10,10,10,10)
+                                CornerRadius = new CornerRadius(10, 10, 10, 10)
                             };
 
                             // adding MOVIE TITELS
@@ -445,7 +445,7 @@ namespace Store
                                 Text = State.Movies[i].Title,
                                 FontFamily = new FontFamily("Segoe UI Semibold"),
                                 FontSize = 12,
-                                Margin = new Thickness(3,3,3,3),
+                                Margin = new Thickness(3, 3, 3, 3),
                                 HorizontalAlignment = HorizontalAlignment.Center
                             };
 
@@ -459,7 +459,7 @@ namespace Store
 
                             movieGrid.Children.Add(movieBorder);
 
-                           
+
 
                             Grid.SetRow(movieBorder, y);
                             Grid.SetColumn(movieBorder, x);
@@ -470,11 +470,11 @@ namespace Store
                              e is System.IO.FileNotFoundException ||
                              e is UriFormatException)
                         {
-                            
+
                             continue;
                         }
                     }
-                    
+
 
 
                 }

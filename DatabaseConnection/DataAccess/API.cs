@@ -20,7 +20,7 @@ namespace DatabaseConnection
 
         public static List<Movie> GetMovieSlice(int a, int b)
         {
-            return ctx.Movies.OrderBy(m => m.Title)
+            return ctx.Movies.OrderBy(m => m.Id)
                 .Skip(a)
                 .Take(30)
                 .ToList();

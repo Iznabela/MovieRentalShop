@@ -51,6 +51,7 @@ namespace Store
         {
             State.PickedMovies.Add(State.Pick);
             MessageBox.Show("Added to your basket", "Visit the basket to checkout!", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
 
         private void MouseUpCancel(object sender, RoutedEventArgs e)

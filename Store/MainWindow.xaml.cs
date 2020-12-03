@@ -24,10 +24,10 @@ namespace Store
     {
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
             State.Movies = API.GetMovieSlice(0, 30);
             HomeWindow.Children.Clear();
-            PrintPosters(CreateMovieGrid());            
+            PrintPosters(CreateMovieGrid());
         }
 
         // when hovering over a movie poster
@@ -71,11 +71,11 @@ namespace Store
                 BorderThickness = new Thickness(3),
                 Height = 400,
                 Width = 700,
-                CornerRadius = new CornerRadius(12, 12, 12, 12)                
+                CornerRadius = new CornerRadius(12, 12, 12, 12)
             };
-            
+
             HomeWindow.Children.Add(border);
- 
+
             var stackpanel = new StackPanel
             {
                 Orientation = Orientation.Vertical
@@ -121,8 +121,8 @@ namespace Store
                 Foreground = Brushes.Black,
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black,
-                
+                BorderBrush = Brushes.Black,               
+
             };
 
 
@@ -130,7 +130,8 @@ namespace Store
 
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.rentalsHistory(State.User.Id);
-           
+            
+
         }
 
 
@@ -149,7 +150,7 @@ namespace Store
             {
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(2),
-                CornerRadius = new CornerRadius(10,10,10,10)
+                CornerRadius = new CornerRadius(10, 10, 10, 10)
             };
 
             var updatedMovieGrid = new Grid()
@@ -170,7 +171,7 @@ namespace Store
             HomeWindow.Children.Add(movieBorder);
 
             var column = 5;
-            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);           
+            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);
 
 
             for (int j = 0; j < column; j++)
@@ -183,9 +184,9 @@ namespace Store
             }
 
             for (int i = 0; i < row; i++)
-            {            
-                
-                
+            {
+
+
                 var rowDefinition = new RowDefinition()
                 {
 
@@ -194,7 +195,7 @@ namespace Store
                 rowDefinition.Height = new GridLength(230);
 
                 updatedMovieGrid.RowDefinitions.Add(rowDefinition);
-                              
+
             }
 
             State.currentGrid = updatedMovieGrid;
@@ -221,7 +222,7 @@ namespace Store
                 CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
 
-           
+
             HomeWindow.Children.Add(border);
 
             var stackpanel = new StackPanel
@@ -244,8 +245,8 @@ namespace Store
 
             stackpanel.Children.Add(welcomeMessage);
 
-           
-          
+
+
             var lview = new ListView()
             {
                 Name = "Lview",
@@ -253,7 +254,7 @@ namespace Store
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
-                
+
             };
             stackpanel.Children.Add(lview);
             lview.SetValue(Grid.RowProperty, 2);
@@ -265,12 +266,12 @@ namespace Store
             gv.Columns.Add(gv1);
             gv1.Width = 550;
 
-            
 
-            
-            
-            
-            
+
+
+
+
+
 
             GridViewColumn gv2 = new GridViewColumn();
             gv2.DisplayMemberBinding = new Binding("Price");
@@ -289,7 +290,7 @@ namespace Store
                 Text = "Total Price: " + sum.ToString() + " kr",
                 FontSize = 18,
                 FontFamily = new FontFamily("Segoe UI Semibold"),
-                Margin = new Thickness(0,0,50,0),
+                Margin = new Thickness(0, 0, 50, 0),
                 HorizontalAlignment = HorizontalAlignment.Right
             };
 
@@ -308,7 +309,7 @@ namespace Store
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170,40,0,0)
+                Margin = new Thickness(170, 40, 0, 0)
             };
 
             var clearButton = new Button
@@ -323,7 +324,7 @@ namespace Store
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170,40,0,0)
+                Margin = new Thickness(170, 40, 0, 0)
             };
 
             var buttonPanel = new StackPanel
@@ -392,10 +393,13 @@ namespace Store
         private void buybtn_Click(object sender, RoutedEventArgs e)
         {
             //Använd kod i varukorg
-            if (API.RegisterSale(State.User, State.PickedMovies))
-                MessageBox.Show("Added to your basket.", "Sale Succeeded!", MessageBoxButton.OK, MessageBoxImage.Information);
-            else
-                MessageBox.Show("An error happened while buying the movie, please try again at a later time.", "Sale Failed!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            API.RegisterSale(State.User, State.PickedMovies);
+            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            CartButton_Click(sender, e);
+
         }
 
         // Printing movie posters in movie grid
@@ -432,7 +436,7 @@ namespace Store
                             {
                                 BorderBrush = Brushes.Black,
                                 BorderThickness = new Thickness(2),
-                                CornerRadius = new CornerRadius(10,10,10,10)
+                                CornerRadius = new CornerRadius(10, 10, 10, 10)
                             };
 
                             // adding MOVIE TITELS
@@ -441,7 +445,7 @@ namespace Store
                                 Text = State.Movies[i].Title,
                                 FontFamily = new FontFamily("Segoe UI Semibold"),
                                 FontSize = 12,
-                                Margin = new Thickness(3,3,3,3),
+                                Margin = new Thickness(3, 3, 3, 3),
                                 HorizontalAlignment = HorizontalAlignment.Center
                             };
 
@@ -455,7 +459,7 @@ namespace Store
 
                             movieGrid.Children.Add(movieBorder);
 
-                           
+
 
                             Grid.SetRow(movieBorder, y);
                             Grid.SetColumn(movieBorder, x);
@@ -466,11 +470,11 @@ namespace Store
                              e is System.IO.FileNotFoundException ||
                              e is UriFormatException)
                         {
-                            
+
                             continue;
                         }
                     }
-                    
+
 
 
                 }

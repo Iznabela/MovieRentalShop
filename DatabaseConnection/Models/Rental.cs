@@ -9,7 +9,7 @@ namespace DatabaseConnection.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual List<Movie> Movies { get; set; } //La till list av Movies då varje rental kan innehålla många filmer
+        public virtual List<Movie> Movies { get; set; } 
     }
 
 }

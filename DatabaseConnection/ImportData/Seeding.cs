@@ -14,9 +14,12 @@ namespace DatabaseConnection
 {
     public static class Seeding
     {
+        /// <summary>
+        /// Initial seeding of the database.
+        /// </summary>
+        /// <param name="ctx"></param>
         public static void ImportData(Context ctx)
         {
-
             using (var reader = new StreamReader(Helper.movieData))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
@@ -27,7 +30,6 @@ namespace DatabaseConnection
                 ctx.SaveChanges();
             }
 
-
             using (var reader = new StreamReader(Helper.customerData))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
@@ -36,11 +38,12 @@ namespace DatabaseConnection
                 ctx.AddRange(records);
                 ctx.SaveChanges();
             }
-
-
         }
-
-
+        /// <summary>
+        /// Importing the initial orders. Was meant for being able to sort by "most popular" among more
+        /// but ran out of time.
+        /// </summary>
+        /// <param name="ctx"></param>
         public static void ImportOrders(Context ctx)
         {
             var random = new Random();
@@ -53,14 +56,11 @@ namespace DatabaseConnection
             var firstMovieId = ctx.Movies.OrderBy(m => m.Id).FirstOrDefault().Id;
             var lastMovieId = ctx.Movies.OrderBy(m => m.Id).LastOrDefault().Id;
 
-
             for (int i = 0; i < 500; i++)
             {
                 var rMovie1 = random.Next(firstMovieId, lastMovieId);
                 var rMovie2 = random.Next(firstMovieId, lastMovieId);
-
-                //var movie1 = ctx.Movies.Where(m => m.Id == rMovie1).FirstOrDefault();
-                //var movie2 = ctx.Movies.Where(m => m.Id == rMovie2).FirstOrDefault();
+             
                 var movie1 = mList.Where(m => m.Id == rMovie1).Single();
                 var movie2 = mList.Where(m => m.Id == rMovie2).Single();
                 var chosenMovies = new List<Movie>() { movie1, movie2 };
@@ -76,12 +76,14 @@ namespace DatabaseConnection
                 };
                 ctx.Add(nRental);
                 ctx.SaveChanges();
-
             }
-
-
         }
 
+        /// <summary>
+        /// Seeding the prices into the database seperately since they were not included in
+        /// the Movies.csv file.
+        /// </summary>
+        /// <param name="ctx"></param>
         public static void AddPricesToDB(Context ctx)
         {
             var mListCount = ctx.Movies.Count();
@@ -91,34 +93,26 @@ namespace DatabaseConnection
 
             using (var reader = new StreamReader(Helper.priceData))
             {
-
                 while (i < mListCount)
                 {
                     pList.Add(Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture));
                     i++;
 
-
                     if (reader.EndOfStream)
                     {
                         reader.DiscardBufferedData();
                         reader.BaseStream.Seek(0, SeekOrigin.Begin);
-
                     }
                 }
             }
-
 
             for (int j = 0; j < mListCount; j++)
             {
                 mList[j].Price = pList[j];
             }
 
-
             ctx.UpdateRange(mList);
-            ctx.SaveChanges();           
-
+            ctx.SaveChanges();        
         }
-
-
     }
 }

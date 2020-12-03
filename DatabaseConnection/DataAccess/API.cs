@@ -10,14 +10,18 @@ namespace DatabaseConnection
 {
     public static class API
     {
-
         static Context ctx;
 
         static API()
         {
             ctx = new Context();
         }
-
+        /// <summary>
+        /// Initial movies on display in home window. 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static List<Movie> GetMovieSlice(int a, int b)
         {
             return ctx.Movies.OrderBy(m => m.Id)
@@ -25,13 +29,23 @@ namespace DatabaseConnection
                 .Take(30)
                 .ToList();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
 
         public static Customer GetCustomerByUserName(string userName)
         {
             return ctx.Customers
                 .FirstOrDefault(c => c.UserName.ToLower() == userName.ToLower());
         }
-
+        /// <summary>
+        /// Method for registering the sale. 
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <param name="movies"></param>
+        /// <returns></returns>
         public static bool RegisterSale(Customer customer, List<Movie> movies)
         {
             try
@@ -50,27 +64,21 @@ namespace DatabaseConnection
 
 
         /// <summary>
-        /// Metod för att skapa propertys i klassen RentalHistory för att
-        /// skicka tillbaka data till DataGrid, kunna lista varje kunds historik. 
+        ///Method for creating a personalized rentalhistory. Unfortunantely a major bug atm
+        ///when clearing the cart (state.pickedmovies) which in turn makes the history not
+        ///being able to update. No solution as of yet since everything is logged in database
+        ///correctly, its only this query that does not display the movies of the recent rentals.
+        ///Closing the program and opening again shows the correct history.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public static IEnumerable rentalsHistory(Customer customer)
         {
-
-
             var rh = new List<RentalHistory>();
-
             var rentals = customer.Rentals;
-                //.Where(m => m.Customer == customer)
-                //.Include(c => c.Movies)
-                //.ToList();
-
-
 
             foreach (var obj in rentals)
             {
-
                 foreach (var item in obj.Movies)
                 {
                     var rHistory = new RentalHistory();
@@ -80,11 +88,13 @@ namespace DatabaseConnection
                     rh.Add(rHistory);
                 }
             }
-
             return rh;
-
         }
-
+        /// <summary>
+        /// Method for searching for movies by the title.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static List<Movie> SearchFunction(string text)
         {
             var mList = new List<Movie>();
@@ -92,7 +102,11 @@ namespace DatabaseConnection
 
             return mList;
         }
-
+        /// <summary>
+        /// Method for sorting movies by the genre
+        /// </summary>
+        /// <param name="selectedValue"></param>
+        /// <returns></returns>
         public static List<Movie> SortGenre(object selectedValue)
         {
             var sortValue = selectedValue.ToString();
@@ -112,5 +126,4 @@ namespace DatabaseConnection
             return mList;
         }
     }
-
 }

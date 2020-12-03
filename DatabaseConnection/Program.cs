@@ -23,8 +23,6 @@ namespace DatabaseConnection
                 Seeding.ImportOrders(ctx);
                 Seeding.AddPricesToDB(ctx);
             }
-
-         
         }
     }
 }

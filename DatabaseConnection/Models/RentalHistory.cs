@@ -9,8 +9,7 @@ namespace DatabaseConnection.Models
     {
         public string MovieTitle { get; set; }
         public DateTime RentalDate { get; set; }
-        public int DaysToReturn { get; set; }       
-       
+        public int DaysToReturn { get; set; }              
         
         public int ReturnDays(DateTime date)
         {
@@ -18,13 +17,7 @@ namespace DatabaseConnection.Models
 
             var daysleft = returnDate - DateTime.Now;
 
-            return Convert.ToInt32(daysleft.Days.ToString());            
-            
+            return Convert.ToInt32(daysleft.Days.ToString()); 
         }
-
-        
-
     }
-
-   
 }

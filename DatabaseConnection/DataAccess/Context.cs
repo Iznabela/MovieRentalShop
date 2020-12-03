@@ -16,33 +16,12 @@ namespace DatabaseConnection
             optionsBuilder
                 //.LogTo(s => System.Diagnostics.Debug.WriteLine(s))
                 .UseLazyLoadingProxies()
-                .UseSqlServer(Helper.ConnString); //ÄNDRA BEROENDE PÅ VEM SOM ANSLUTER.         
-                
+                .UseSqlServer(Helper.ConnString);
         }
-
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()                
-                .Property(c => c.UserName)
-                .IsRequired();
-
-            modelBuilder.Entity<Customer>()
-                .HasAlternateKey(c => c.UserName);
-
-            modelBuilder.Entity<Customer>()
-                .HasAlternateKey(c => c.EmailAdress);                
-
-            modelBuilder.Entity<Customer>()
-                .Property(c => c.Password)
-                .IsRequired();
-
-            
-
-
-
-            
-                
+           
         }
     }
 }

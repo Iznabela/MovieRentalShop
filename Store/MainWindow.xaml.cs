@@ -26,27 +26,148 @@ namespace Store
         public MainWindow()
         {
             InitializeComponent();
-            State.Movies = API.GetMovieSlice(0, 30);
+            State.Movies = API.GetMovieSlice(0, 60);
             HomeWindow.Children.Clear();
             PrintPosters(CreateMovieGrid());
+
+            // Button events
+            SortGenreButton.MouseEnter += SortGenreButton_MouseEnter;
+            SortGenreButton.MouseLeave += SortGenreButton_MouseLeave;
+
+            SearchButton.MouseEnter += SearchButton_MouseEnter;
+            SearchButton.MouseLeave += SearchButton_MouseLeave;
         }
 
-        // when hovering over a movie poster
-        private void MovieBoxEnter(object sender, MouseEventArgs e)
+        // CREATE MOVIEGRID
+        private Grid CreateMovieGrid()
         {
-            var movieBox = (GroupBox)sender;
-            movieBox.Height = 220;
-            movieBox.Width = 160;
+            var movieBorder = new Border
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(2),
+                CornerRadius = new CornerRadius(10, 10, 10, 10)
+            };
+
+            var updatedMovieGrid = new Grid()
+            {
+                Width = 950,
+                Name = "updatedMovieGrid",
+                ShowGridLines = false
+            };
+
+            var scrollViewer = new ScrollViewer()
+            {
+                Content = updatedMovieGrid,
+                Width = 950
+            };
+
+            movieBorder.Child = scrollViewer;
+
+            HomeWindow.Children.Add(movieBorder);
+
+            var column = 5;
+            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);
+
+            for (int j = 0; j < column; j++)
+            {
+                var columnDefinition = new ColumnDefinition()
+                {
+
+                };
+                updatedMovieGrid.ColumnDefinitions.Add(columnDefinition);
+            }
+
+            for (int i = 0; i < row; i++)
+            {
+                var rowDefinition = new RowDefinition()
+                {
+
+                };
+
+                rowDefinition.Height = new GridLength(230);
+
+                updatedMovieGrid.RowDefinitions.Add(rowDefinition);
+            }
+
+            State.CurrentGrid = updatedMovieGrid;
+
+            return updatedMovieGrid;
         }
 
-        // when not hovering over a movie poster
-        private void MovieBoxLeave(object sender, MouseEventArgs e)
+        // PRINTING MOVIE POSTERS
+        private void PrintPosters(Grid movieGrid)
         {
-            var movieBox = (GroupBox)sender;
-            movieBox.Height = 180;
-            movieBox.Width = 120;
+            int i = 0;
+            for (int y = 0; y < movieGrid.RowDefinitions.Count; y++)
+            {
+                for (int x = 0; x < movieGrid.ColumnDefinitions.Count; x++)
+                {
+                    if (i < State.Movies.Count)
+                    {
+                        var movie = State.Movies[i];
+                        try
+                        {
+                            // adding MOVIE POSTERS
+                            var image = new PosterImage()
+                            {
+                                X = x,
+                                Y = y
+                            };
+                            image.Cursor = Cursors.Hand;
+                            image.MouseUp += Image_MouseUp;
+                            image.HorizontalAlignment = HorizontalAlignment.Center;
+                            image.VerticalAlignment = VerticalAlignment.Center;
+                            image.Source = new BitmapImage(new Uri(movie.Poster));
+                            image.Height = 150;
+                            image.Margin = new Thickness(0, 10, 0, 20);
+
+                            var movieBorder = new Border
+                            {
+                                BorderBrush = Brushes.Black,
+                                BorderThickness = new Thickness(2),
+                                CornerRadius = new CornerRadius(7, 7, 7, 7)
+                            };
+
+                            // adding MOVIE TITELS
+                            var titleBlock = new TextBlock
+                            {
+                                Text = State.Movies[i].Title,
+                                FontFamily = new FontFamily("Segoe UI Semibold"),
+                                FontSize = 12,
+                                Margin = new Thickness(3, 3, 3, 3),
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
+
+                            var movieTitlePanel = new StackPanel();
+
+                            movieTitlePanel.Children.Add(image);
+                            movieTitlePanel.Children.Add(titleBlock);
+
+                            movieBorder.Child = movieTitlePanel;
+
+                            movieGrid.Children.Add(movieBorder);
+
+                            image.MouseEnter += MovieBoxEnter;
+                            image.MouseLeave += MovieBoxLeave;
+
+                            Grid.SetRow(movieBorder, y);
+                            Grid.SetColumn(movieBorder, x);
+                            i++;
+                        }
+                        catch (Exception e) when
+                            (e is ArgumentNullException ||
+                             e is System.IO.FileNotFoundException ||
+                             e is UriFormatException)
+                        {
+
+                            continue;
+                        }
+                    }
+                }
+            }
         }
 
+        // CLICKING & HOVERING MOVIE POSTER
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             //Debugging, den känner inte av vilken kolumn den är i.
@@ -60,7 +181,63 @@ namespace Store
             var movieWindow = new MovieWindow();
             movieWindow.Show();
         }
+        private void MovieBoxEnter(object sender, MouseEventArgs e)
+        {
+            var poster = (sender as PosterImage);
+            poster.Height = 170;
+        }
+        private void MovieBoxLeave(object sender, MouseEventArgs e)
+        {
+            var poster = (sender as PosterImage);
+            poster.Height = 150;
+        }
 
+        // SEARCH EVENTS
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            State.Movies = API.SearchFunction(searchTxt.Text);
+            HomeWindow.Children.Clear();
+            PrintPosters(CreateMovieGrid());
+        }
+        private void SearchButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.Black;
+        }
+        private void SearchButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.LightGray;
+        }
+        private void SearchTxt_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (searchTxt.Text == "Search for Title")
+            {
+                searchTxt.Text = string.Empty;
+            }
+        }
+
+        // SORT EVENTS
+        private void SortButton_Click(object sender, RoutedEventArgs e)
+        {
+            State.Movies = API.SortGenre(SortByGenre.SelectedValue);
+            HomeWindow.Children.Clear();
+            PrintPosters(CreateMovieGrid());
+        }
+        private void SortGenreButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.Black;
+        }
+        private void SortGenreButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.LightGray;
+        }
+
+        // SIDEBAR EVENTS
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomeWindow.Children.Clear();
+
+            PrintPosters(CreateMovieGrid());
+        }
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow.Children.Clear();
@@ -128,81 +305,6 @@ namespace Store
             stackpanel.Children.Add(dataGrid);
             dataGrid.ItemsSource = API.RentalsHistory(State.User);
         }
-
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            HomeWindow.Children.Clear();
-
-            State.Movies = API.GetMovieSlice(0, 30);
-
-            PrintPosters(CreateMovieGrid());
-        }
-
-        private Grid CreateMovieGrid()
-        {
-            var movieBorder = new Border
-            {
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(2),
-                CornerRadius = new CornerRadius(10, 10, 10, 10)
-            };
-
-            var updatedMovieGrid = new Grid()
-            {
-                Width = 950,
-                Name = "updatedMovieGrid",
-                ShowGridLines = false
-            };
-
-            var scrollViewer = new ScrollViewer()
-            {
-                Content = updatedMovieGrid,
-                Width = 950
-            };
-
-            movieBorder.Child = scrollViewer;
-
-            HomeWindow.Children.Add(movieBorder);
-
-            var column = 5;
-            var row = (int)Math.Ceiling((double)State.Movies.Count() / (double)column);
-
-
-            for (int j = 0; j < column; j++)
-            {
-                var columnDefinition = new ColumnDefinition()
-                {
-
-                };
-                updatedMovieGrid.ColumnDefinitions.Add(columnDefinition);
-            }
-
-            for (int i = 0; i < row; i++)
-            {
-
-
-                var rowDefinition = new RowDefinition()
-                {
-
-                };
-
-                rowDefinition.Height = new GridLength(230);
-
-                updatedMovieGrid.RowDefinitions.Add(rowDefinition);
-
-            }
-
-            State.CurrentGrid = updatedMovieGrid;
-
-            return updatedMovieGrid;
-        }
-
-        /// <summary>
-        /// Metod för att komma till varukorgen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow.Children.Clear();
@@ -216,7 +318,6 @@ namespace Store
                 Width = 700,
                 CornerRadius = new CornerRadius(15, 15, 15, 15)
             };
-
 
             HomeWindow.Children.Add(border);
 
@@ -235,12 +336,10 @@ namespace Store
                 Text = $"Hi {State.User.UserName.ToUpper()}! Current items in your cart.",
                 FontSize = 18,
                 Margin = new Thickness(0, 20, 0, 20),
-                FontFamily = new FontFamily("Segoe UI Semibold"),
+                FontFamily = new FontFamily("Segoe UI"),
             };
 
             stackpanel.Children.Add(welcomeMessage);
-
-
 
             var lview = new ListView()
             {
@@ -251,6 +350,7 @@ namespace Store
                 VerticalAlignment = VerticalAlignment.Center,
 
             };
+
             stackpanel.Children.Add(lview);
             lview.SetValue(Grid.RowProperty, 2);
 
@@ -260,13 +360,6 @@ namespace Store
             gv1.Header = "Title";
             gv.Columns.Add(gv1);
             gv1.Width = 550;
-
-
-
-
-
-
-
 
             GridViewColumn gv2 = new GridViewColumn();
             gv2.DisplayMemberBinding = new Binding("Price");
@@ -284,17 +377,17 @@ namespace Store
             {
                 Text = "Total Price: " + sum.ToString() + " kr",
                 FontSize = 18,
-                FontFamily = new FontFamily("Segoe UI Semibold"),
+                FontFamily = new FontFamily("Segoe UI"),
                 Margin = new Thickness(0, 0, 50, 0),
                 HorizontalAlignment = HorizontalAlignment.Right
             };
 
             stackpanel.Children.Add(totalPrice);
 
-            // BUYBUTTON with clickevent
+            // BUYBUTTON
             var buyButton = new Button
             {
-                Height = 30,
+                Height = 35,
                 Width = 75,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -304,23 +397,38 @@ namespace Store
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170, 40, 0, 0)
+                BorderBrush = Brushes.DarkGray,
+                Margin = new Thickness(170, 40, 0, 0),
+                Cursor = Cursors.Hand
             };
 
+            // BUY BUTTON EVENTS
+            buyButton.MouseEnter += BuyButton_MouseEnter;
+            buyButton.MouseLeave += BuyButton_MouseLeave;
+            buyButton.Cursor = Cursors.Hand;
+            buyButton.Click += BuyButton_Click;
+
+            // CLEAR BUTTON
             var clearButton = new Button
             {
-                Height = 30,
+                Height = 35,
                 Width = 75,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                VerticalAlignment = VerticalAlignment.Center,
                 Name = "ClearButton",
                 Content = "Clear",
                 FontSize = 16,
                 Background = Brushes.Black,
                 Foreground = Brushes.LightGray,
                 BorderThickness = new Thickness(2),
-                Margin = new Thickness(170, 40, 0, 0)
+                BorderBrush = Brushes.DarkGray,
+                Margin = new Thickness(170, 40, 0, 0),
+                Cursor = Cursors.Hand,
             };
+
+            // CLEAR BUTTON EVENTS
+            clearButton.MouseEnter += new MouseEventHandler(ClearButton_MouseEnter);
+            clearButton.MouseLeave += new MouseEventHandler(ClearButton_MouseLeave);
+            clearButton.Cursor = Cursors.Hand;
+            clearButton.Click += ClearButton_Click;
 
             var buttonPanel = new StackPanel
             {
@@ -331,164 +439,7 @@ namespace Store
             buttonPanel.Children.Add(clearButton);
 
             stackpanel.Children.Add(buttonPanel);
-
-            // BUY BUTTON EVENTS
-            buyButton.MouseEnter += BuyButton_MouseEnter;
-            buyButton.MouseLeave += BuyButton_MouseLeave;
-            buyButton.Cursor = Cursors.Hand;
-            buyButton.Click += buybtn_Click;
-
-            // CLEAR BUTTON EVENTS
-            clearButton.MouseEnter += ClearButton_MouseEnter;
-            clearButton.MouseLeave += ClearButton_MouseLeave;
-            clearButton.Cursor = Cursors.Hand;
-            clearButton.Click += ClearButton_Click;
         }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            // State.PickedMovies.Clear();
-            var listLength = State.PickedMovies.Count;
-            for (int i = 0; i < listLength; i++)
-            {
-                State.PickedMovies.RemoveAt(0);
-            }
-            CartButton_Click(sender, e);
-        }
-
-        private void ClearButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var button = sender as Button;
-            button.Background = Brushes.Black;
-        }
-
-        private void ClearButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var button = sender as Button;
-            button.Background = Brushes.Red;
-        }
-
-        private void BuyButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var button = sender as Button;
-            button.Background = Brushes.Black;
-        }
-
-        private void BuyButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var button = sender as Button;
-            button.Background = Brushes.Red;
-        }
-
-        /// <summary>
-        /// BuyButton for the Cart
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buybtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Använd kod i varukorg
-            API.RegisterSale(State.User, State.PickedMovies);
-            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
-            
-            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
-            CartButton_Click(sender, e);
-
-        }
-
-        // Printing movie posters in movie grid
-        private void PrintPosters(Grid movieGrid)
-        {
-            //TODO 
-            // create stackpanel to put groupbox and separate titletext in
-
-            int i = 0;
-            for (int y = 0; y < movieGrid.RowDefinitions.Count; y++)
-            {
-                for (int x = 0; x < movieGrid.ColumnDefinitions.Count; x++)
-                {
-                    if (i < State.Movies.Count)
-                    {
-                        var movie = State.Movies[i];
-                        try
-                        {
-                            // adding MOVIE POSTERS
-                            var image = new PosterImage()
-                            {
-                                X = x,
-                                Y = y
-                            };
-                            image.Cursor = Cursors.Hand;
-                            image.MouseUp += Image_MouseUp;
-                            image.HorizontalAlignment = HorizontalAlignment.Center;
-                            image.VerticalAlignment = VerticalAlignment.Center;
-                            image.Source = new BitmapImage(new Uri(movie.Poster));
-                            image.Height = 150;
-                            image.Margin = new Thickness(0, 20, 0, 20);
-
-                            var movieBorder = new Border
-                            {
-                                BorderBrush = Brushes.Black,
-                                BorderThickness = new Thickness(2),
-                                CornerRadius = new CornerRadius(10, 10, 10, 10)
-                            };
-
-                            // adding MOVIE TITELS
-                            var titleBlock = new TextBlock
-                            {
-                                Text = State.Movies[i].Title,
-                                FontFamily = new FontFamily("Segoe UI Semibold"),
-                                FontSize = 12,
-                                Margin = new Thickness(3, 3, 3, 3),
-                                HorizontalAlignment = HorizontalAlignment.Center
-                            };
-
-
-                            var movieTitlePanel = new StackPanel();
-
-                            movieTitlePanel.Children.Add(image);
-                            movieTitlePanel.Children.Add(titleBlock);
-
-                            movieBorder.Child = movieTitlePanel;
-
-                            movieGrid.Children.Add(movieBorder);
-
-
-
-                            Grid.SetRow(movieBorder, y);
-                            Grid.SetColumn(movieBorder, x);
-                            i++;
-                        }
-                        catch (Exception e) when
-                            (e is ArgumentNullException ||
-                             e is System.IO.FileNotFoundException ||
-                             e is UriFormatException)
-                        {
-
-                            continue;
-                        }
-                    }
-
-
-
-                }
-            }
-        }
-
-        private void search_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            State.Movies = API.SearchFunction(searchTxt.Text);
-            HomeWindow.Children.Clear();
-            PrintPosters(CreateMovieGrid());
-        }
-
-        private void sortGenre_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            State.Movies = API.SortGenre(SortByGenre.SelectedValue);
-            HomeWindow.Children.Clear();
-            PrintPosters(CreateMovieGrid());
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             State.User.FirstName = "";
@@ -502,18 +453,44 @@ namespace Store
             this.Close();
         }
 
-        private void searchTxt_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        // CLEAR BUTTON EVENTS
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            if (searchTxt.Text == "Search for Title")
+            // State.PickedMovies.Clear();
+            var listLength = State.PickedMovies.Count;
+            for (int i = 0; i < listLength; i++)
             {
-                searchTxt.Text = string.Empty;
+                State.PickedMovies.RemoveAt(0);
             }
+            CartButton_Click(sender, e);
         }
-    }
+        private void ClearButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.Black;
+        }
+        private void ClearButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.LightGray;
+        }
 
-    public class PosterImage : Image
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
+        // BUY BUTTON EVENTS
+        private void BuyButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Använd kod i varukorg
+            API.RegisterSale(State.User, State.PickedMovies);
+            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            CartButton_Click(sender, e);
+
+        }
+        private void BuyButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.Black;
+        }
+        private void BuyButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Foreground = Brushes.LightGray;
+        }
     }
 }

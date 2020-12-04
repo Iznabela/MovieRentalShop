@@ -22,15 +22,9 @@ namespace Store
         public LoginWindow()
         {
             InitializeComponent();
-
-            submitButton.MouseEnter += SubmitButton_MouseEnter;
         }
 
-        private void SubmitButton_MouseEnter(object sender, RoutedEventArgs e)
-        {
-            submitButton.Background = Brushes.DarkRed;
-        }
-        private void submitButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             using var ctx = new Context();
             var customer = ctx.Customers.Where(c => c.UserName == userNameText.Text).FirstOrDefault();            
@@ -58,8 +52,7 @@ namespace Store
                 passwordText.Password = "";
             }
         }
-
-        private void registerButton_click(object sender, RoutedEventArgs e)
+        private void RegisterButton_click(object sender, RoutedEventArgs e)
         {
             var registerWindow = new RegisterWindow();
             registerWindow.Show();

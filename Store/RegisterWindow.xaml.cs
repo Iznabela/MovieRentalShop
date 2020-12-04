@@ -25,7 +25,7 @@ namespace Store
             InitializeComponent();
         }
 
-        private void registerButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             using var ctx = new Context();
             var validateUserInput = true;
@@ -93,17 +93,11 @@ namespace Store
             
 
         }
-
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             var loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
-        }
-
-        private void registerButton2_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

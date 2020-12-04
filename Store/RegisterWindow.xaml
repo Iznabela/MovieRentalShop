@@ -64,7 +64,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-
         <Grid.Background>
             <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                 <GradientStop Color="White" Offset="0.0" />
@@ -90,7 +89,6 @@
                   BorderThickness="3" Height="400" Width="300"
                   Grid.ColumnSpan="2" FontFamily="Segoe UI" FontSize="18">
             <GroupBox.Header>Register Account</GroupBox.Header>
-
             <StackPanel x:Name="accountInfo" Orientation="Vertical" Grid.Column="1" Grid.Row="1" Background="Transparent">
 
                 <!-- First Name -->
@@ -113,7 +111,6 @@
                            Text="Last Name: " FontFamily="Segoe UI" 
                            Margin="10,10,0,0" Background="Transparent"
                            FontSize="14"/>
-
                 <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
@@ -122,12 +119,11 @@
                              BorderThickness="0" Background="Transparent" 
                              FontFamily="Segoe UI Semibold" HorizontalContentAlignment="Center"/>
                 </Border>
-
+                
                 <!-- Email Adress -->
                 <TextBlock HorizontalAlignment="Center" FontSize="14" 
                            VerticalAlignment="Center" Text="Email Adress: " 
                            FontFamily="Segoe UI" Margin="10,10,0,0"/>
-
                 <Border CornerRadius="15" BorderThickness="1" BorderBrush="Black" 
                         Margin="10,5,0,0" Width="150" HorizontalAlignment="Center">
 
@@ -137,7 +133,7 @@
                              Background="Transparent" FontFamily="Segoe UI" 
                              HorizontalContentAlignment="Center"/>
                 </Border>
-                
+
                 <!-- Username -->
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Text="Username:" FontFamily="Segoe UI" 
@@ -163,13 +159,12 @@
                                  HorizontalAlignment="Center" Width="140" Height="25" Margin="0,0,0,0"
                                  BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Center"/>
                 </Border>
-
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
                     <!-- Register Account Button-->
                     <Button x:Name="registerButton" HorizontalAlignment="Center" 
                         VerticalAlignment="Center" Margin="10,20,10,20" 
-                        BorderThickness="0" Click="registerButton_Click" 
+                        BorderThickness="0" Click="RegisterButton_Click" 
                         FontFamily="Segoe UI Semibold" Cursor="Hand">
                         <Button.Template>
                             <ControlTemplate>
@@ -183,10 +178,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
                     <Button x:Name="cancelButton" HorizontalAlignment="Center" 
                         VerticalAlignment="Bottom" Margin="10,20,10,20" 
-                        BorderThickness="0" Click="cancelButton_Click" 
+                        BorderThickness="0" Click="CancelButton_Click" 
                         FontFamily="Segoe UI Semibold" Cursor="Hand">
                         <Button.Template>
                             <ControlTemplate>
@@ -194,21 +188,14 @@
                                     <TextBlock Text="Cancel" Foreground="LightGray"
                                            HorizontalAlignment="Center"
                                            Margin="20,2,20,2" Height="25"
-                                           FontSize="15" FontFamily="Segoe UI"
-                                           >
+                                           FontSize="15" FontFamily="Segoe UI">
                                     </TextBlock>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
                 </WrapPanel>
-
-
             </StackPanel>
-
-
-
         </GroupBox>
-
     </Grid>
 </Window>

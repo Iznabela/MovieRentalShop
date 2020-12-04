@@ -123,15 +123,16 @@
                 <!-- Add to cart or cancel -->
                 <Button x:Name="addToCartButton" Grid.Column="0" Grid.Row="4"
                         Grid.ColumnSpan="2" Width="85" Height="25"
-                        BorderThickness="0" FontSize="11" Margin="0,0,50,0" Click="ToCartClick">
+                        BorderThickness="0" FontSize="11" Margin="0,0,50,0" 
+                        Cursor="Hand" Click="ToCartClick">
                     <Button.Template>
                         <ControlTemplate>
-                            <Border CornerRadius="10" Background="Black">
-                                <TextBlock Text="Add to Cart" Foreground="Gray"
+                            <Border CornerRadius="15" Background="Black">
+                                <TextBlock Text="Add to Cart" Foreground="LightGray"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            Margin="0,0,0,0"
-                                           FontFamily="Segoe Script">
+                                           FontFamily="Segoe UI">
                                 </TextBlock>
                             </Border>
                         </ControlTemplate>
@@ -141,15 +142,16 @@
                 <!-- Cancel -->
                 <Button x:Name="cancelButton" Grid.Column="2" Grid.Row="4"
                         Grid.ColumnSpan="2" Width="85" Height="25"
-                        BorderThickness="0" FontSize="11" Margin="0,0,30,0" Click="MouseUpCancel">
+                        BorderThickness="0" FontSize="11" Margin="0,0,30,0" 
+                        Click="MouseUpCancel" Cursor="Hand">
                     <Button.Template>
                         <ControlTemplate>
-                            <Border CornerRadius="10" Background="Black">
-                                <TextBlock Text="Cancel" Foreground="Gray"
+                            <Border CornerRadius="15" Background="Black">
+                                <TextBlock Text="Cancel" Foreground="LightGray"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            Margin="0,0,0,0"
-                                           FontFamily="Segoe Script">
+                                           FontFamily="Segoe UI">
                                 </TextBlock>
                             </Border>
                         </ControlTemplate>

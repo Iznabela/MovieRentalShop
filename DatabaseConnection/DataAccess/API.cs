@@ -46,7 +46,7 @@ namespace DatabaseConnection
         /// <param name="customer"></param>
         /// <param name="movies"></param>
         /// <returns></returns>
-        public static bool RegisterSale(Customer customer, List<Movie> movies)
+        public static void RegisterSale(Customer customer, List<Movie> movies)
         {
             try
             {
@@ -59,7 +59,6 @@ namespace DatabaseConnection
                 System.Diagnostics.Debug.WriteLine(e.InnerException.Message);
             }
         }
-
 
         /// <summary>
         ///Method for creating a personalized rentalhistory. Unfortunantely a major bug atm

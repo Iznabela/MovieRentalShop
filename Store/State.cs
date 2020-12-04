@@ -15,6 +15,6 @@ namespace Store
         public static List<Movie> Movies { get; set; }
         public static Movie Pick { get; set; }
         public static List<Movie> PickedMovies { get; set; } = new List<Movie>();
-        public static Grid currentGrid { get; set; }
+        public static Grid CurrentGrid { get; set; }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DatabaseConnection;
+using DatabaseConnection.Models;
 
 namespace Store
 {
@@ -52,7 +53,7 @@ namespace Store
             //Kanske känner av i fel grid? 
             var x = (sender as PosterImage).X;
             var y = (sender as PosterImage).Y;
-            int i = y * State.currentGrid.ColumnDefinitions.Count() + x;
+            int i = y * State.CurrentGrid.ColumnDefinitions.Count() + x;
 
             State.Pick = State.Movies[i];
 
@@ -122,16 +123,10 @@ namespace Store
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
                 BorderBrush = Brushes.Black,
-
             };
 
-
-
-
             stackpanel.Children.Add(dataGrid);
-            dataGrid.ItemsSource = API.rentalsHistory(State.User);
-
-
+            dataGrid.ItemsSource = API.RentalsHistory(State.User);
         }
 
 
@@ -198,7 +193,7 @@ namespace Store
 
             }
 
-            State.currentGrid = updatedMovieGrid;
+            State.CurrentGrid = updatedMovieGrid;
 
             return updatedMovieGrid;
         }
@@ -395,9 +390,8 @@ namespace Store
             //Använd kod i varukorg
             API.RegisterSale(State.User, State.PickedMovies);
             MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-
-            //State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            
+            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
             CartButton_Click(sender, e);
 
         }

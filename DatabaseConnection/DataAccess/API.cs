@@ -22,7 +22,7 @@ namespace DatabaseConnection
         {
             return ctx.Movies.OrderBy(m => m.Id)
                 .Skip(a)
-                .Take(30)
+                .Take(b)
                 .ToList();
         }
 
@@ -32,19 +32,17 @@ namespace DatabaseConnection
                 .FirstOrDefault(c => c.UserName.ToLower() == userName.ToLower());
         }
 
-        public static bool RegisterSale(Customer customer, List<Movie> movies)
+        public static void RegisterSale(Customer customer, List<Movie> movies)
         {
             try
             {
                 ctx.Add(new Rental() { Date = DateTime.Now, Customer = customer, Movies = movies });
-                bool one_record_added = ctx.SaveChanges() == 1;
-                return one_record_added;
+                ctx.SaveChanges();
             }
             catch (DbUpdateException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 System.Diagnostics.Debug.WriteLine(e.InnerException.Message);
-                return false;
             }
         }
 
@@ -55,22 +53,14 @@ namespace DatabaseConnection
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static IEnumerable rentalsHistory(Customer customer)
+        public static IEnumerable RentalsHistory(Customer customer)
         {
-
-
             var rh = new List<RentalHistory>();
 
             var rentals = customer.Rentals;
-                //.Where(m => m.Customer == customer)
-                //.Include(c => c.Movies)
-                //.ToList();
-
-
 
             foreach (var obj in rentals)
             {
-
                 foreach (var item in obj.Movies)
                 {
                     var rHistory = new RentalHistory();
@@ -80,9 +70,7 @@ namespace DatabaseConnection
                     rh.Add(rHistory);
                 }
             }
-
             return rh;
-
         }
 
         public static List<Movie> SearchFunction(string text)

@@ -159,7 +159,7 @@ namespace Store
                              e is System.IO.FileNotFoundException ||
                              e is UriFormatException)
                         {
-
+                            i++;
                             continue;
                         }
                     }

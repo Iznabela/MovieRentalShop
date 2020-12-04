@@ -15,7 +15,5 @@ namespace DatabaseConnection.DataAccess
         public static string movieData = @"..\\netcoreapp3.1\\ImportData\\Movies.csv";
         public static string customerData = @"..\\netcoreapp3.1\\ImportData\\Customers.csv";
         public static string priceData = @"..\\netcoreapp3.1\\ImportData\\Price.csv";
- 
-
     }
 }

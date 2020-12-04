@@ -18,7 +18,5 @@ namespace DatabaseConnection.ClassMaps
             Map(m => m.Poster).Name("Poster");
             
         }
-    }
-
-    
+    }    
 }

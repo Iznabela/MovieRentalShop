@@ -170,8 +170,7 @@ namespace Store
         // CLICKING & HOVERING MOVIE POSTER
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //Debugging, den känner inte av vilken kolumn den är i.
-            //Kanske känner av i fel grid? 
+           
             var x = (sender as PosterImage).X;
             var y = (sender as PosterImage).Y;
             int i = y * State.CurrentGrid.ColumnDefinitions.Count() + x;
@@ -295,7 +294,7 @@ namespace Store
                 Width = 600,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 20, 0, 0),
-                DataContext = State.Movies, ////ändra sedan, bara för test
+                DataContext = State.Movies, 
                 Foreground = Brushes.Black,
                 Background = Brushes.GhostWhite,
                 BorderThickness = new Thickness(1),
@@ -478,9 +477,7 @@ namespace Store
         {
             //Använd kod i varukorg
             API.RegisterSale(State.User, State.PickedMovies);
-            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            State.PickedMovies.RemoveRange(0, State.PickedMovies.Count);
+            MessageBox.Show("Purchase completed!", "You can now view the movies in your profile history!", MessageBoxButton.OK, MessageBoxImage.Information);            
             CartButton_Click(sender, e);
 
         }
